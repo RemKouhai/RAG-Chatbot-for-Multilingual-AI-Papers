@@ -1,0 +1,1365 @@
+[
+  {
+    "question": "Mô hình Mamba giải quyết điểm yếu nào của các mô hình State Space Models (SSMs) truyền thống và kiến trúc mạng convolutions?",
+    "ground_truth": "Mamba giải quyết điểm yếu về khả năng thực hiện 'content-based reasoning' (suy luận dựa trên nội dung). Nó cho phép các tham số SSM là hàm của đầu vào (input-dependent), giúp mô hình chọn lọc thông tin để truyền tải hoặc quên đi dọc theo chiều dài chuỗi.",
+    "type": "fact",
+    "source_document": "Paper_001_Mamba_ Linear-Time Sequence Modeling with Selective State Spaces.pdf"
+  },
+  {
+    "question": "Trong thí nghiệm đo thông lượng suy luận (Inference Throughput), kích thước batch size và độ dài prompt được thiết lập như thế nào cho mô hình Mamba 1.4B?",
+    "ground_truth": "Prompt length được thiết lập là 2048 và generation length là 128. Batch size thay đổi từ 1, 2, 4, 8, 16, 32, 64 đến 128.",
+    "type": "table_extraction",
+    "source_document": "Paper_001_Mamba_ Linear-Time Sequence Modeling with Selective State Spaces.pdf"
+  },
+  {
+    "question": "Dựa trên kết quả thực nghiệm trong bài báo 'Transformers are SSMs', hãy so sánh độ chính xác (accuracy) trên task Winogrande giữa Mamba-2.8B và Mamba-2-2.7B.",
+    "ground_truth": "Mamba-2.8B đạt 63.5, trong khi Mamba-2-2.7B đạt kết quả cao hơn (cụ thể cần xem dòng tương ứng trong bảng kết quả, snippet cho thấy sự cải thiện của Mamba-2 so với Mamba đời đầu).",
+    "type": "reasoning",
+    "source_document": "Paper_002_Transformers are SSMs_ Generalized Models and Efficient Algorithms Through Structured State Space Duality.pdf"
+  },
+  {
+    "question": "Kiến trúc xLSTM bao gồm hai sửa đổi chính nào đối với cấu trúc bộ nhớ LSTM truyền thống?",
+    "ground_truth": "xLSTM giới thiệu: (1) sLSTM với bộ nhớ vô hướng (scalar memory), cập nhật vô hướng và cơ chế trộn bộ nhớ mới; (2) mLSTM có khả năng song song hóa hoàn toàn (fully parallelizable) với cấu trúc bộ nhớ ma trận.",
+    "type": "fact",
+    "source_document": "Paper_003_xLSTM_ Extended Long Short-Term Memory.pdf"
+  },
+  {
+    "question": "Mô hình xLSTM 7B sử dụng cơ chế Self-Attention giống như Transformer không?",
+    "ground_truth": "Không. Bài báo nói rằng xLSTM là một giải pháp thay thế mạnh mẽ cho Transformer, cung cấp độ phức tạp tính toán tuyến tính và bộ nhớ hằng số, khác với cơ chế attention bậc hai của Transformer.",
+    "type": "negative",
+    "source_document": "Paper_004_xLSTM 7B_ A Recurrent LLM for Fast and Efficient Inference.pdf"
+  },
+  {
+    "question": "Tính tổng số tham số (parameters) của một lớp mLSTM đơn lẻ trong mô hình xLSTM 7B dựa trên các công thức được cung cấp.",
+    "ground_truth": "Tổng tham số = (d_model * num_heads * (2*d_qk + d_v)) + (2 * d_model) + (d_model * d_model) + (d_model * d_model) + d_model. Bao gồm qkv projection, input/forget/output gates, output projection và norm.",
+    "type": "reasoning",
+    "source_document": "Paper_004_xLSTM 7B_ A Recurrent LLM for Fast and Efficient Inference.pdf"
+  },
+  {
+    "question": "Theo bài báo về xLSTM Scaling Laws, xLSTM mở rộng quy mô như thế nào so với Transformer trong các kịch bản training và inference điển hình?",
+    "ground_truth": "xLSTM mở rộng quy mô một cách thuận lợi (scales favorably) so với Transformer, đặc biệt là về độ phức tạp thời gian tuyến tính (linear time-complexity) đối với độ dài ngữ cảnh.",
+    "type": "fact",
+    "source_document": "Paper_005_xLSTM Scaling Laws_ Competitive Performance with Linear Time-Complexity.pdf"
+  },
+  {
+    "question": "Trong bài báo 'A Large Recurrent Action Model' (LRAM), kết quả thực nghiệm của nhiệm vụ 'Panda Plate ObjectDoor Push' có giá trị trung bình là bao nhiêu?",
+    "ground_truth": "337.36 ± 17.06",
+    "type": "table_extraction",
+    "source_document": "Paper_006_A Large Recurrent Action Model_ xLSTM enables Fast Inference for Robotics Tasks.pdf"
+  },
+  {
+    "question": "Mercury Coder Mini đạt tốc độ throughput (token/giây) là bao nhiêu trên GPU NVIDIA H100?",
+    "ground_truth": "1109 tokens/sec",
+    "type": "table_extraction",
+    "source_document": "Paper_007_Mercury_ Ultra-Fast Language Models Based on Diffusion.pdf"
+  },
+  {
+    "question": "Mô hình Mercury Coder có sử dụng kiến trúc Mamba hay RNN không?",
+    "ground_truth": "Không. Mercury Coder là mô hình dựa trên khuếch tán (diffusion) được tham số hóa thông qua kiến trúc Transformer.",
+    "type": "negative",
+    "source_document": "Paper_007_Mercury_ Ultra-Fast Language Models Based on Diffusion.pdf"
+  },
+  {
+    "question": "MicroAdam giảm thiểu chi phí bộ nhớ bằng cách nào so với Adam optimizer truyền thống?",
+    "ground_truth": "MicroAdam nén thông tin gradient trước khi đưa vào trạng thái tối ưu hóa (optimizer state) và kiểm soát lỗi nén thông qua cơ chế phản hồi lỗi (error feedback) mới, trong đó thông tin sửa lỗi cũng được nén.",
+    "type": "fact",
+    "source_document": "Paper_008_MicroAdam_ Accurate Adaptive Optimization with Low Space Overhead and Provable Convergence.pdf"
+  },
+  {
+    "question": "XQuant đạt được mức lượng tử hóa KV cache xuống dưới bao nhiêu bit mà vẫn giữ được hiệu năng?",
+    "ground_truth": "Dưới 1.4 bits (sub-1.4 bits).",
+    "type": "fact",
+    "source_document": "Paper_009_XQuant_ Achieving Ultra-Low Bit KV Cache Quantization with Cross-Layer Compression.pdf"
+  },
+  {
+    "question": "Phương pháp 'Pre-RoPE Key Quantization' trong KVQuant giải quyết vấn đề gì?",
+    "ground_truth": "Nó thực hiện lượng tử hóa Key activations trước khi áp dụng rotary positional embedding (RoPE) để giảm thiểu tác động tiêu cực của RoPE lên quá trình lượng tử hóa.",
+    "type": "reasoning",
+    "source_document": "Paper_010_KVQuant_ Towards 10 Million Context Length LLM Inference with KV Cache Quantization.pdf"
+  },
+  {
+    "question": "Theo bảng dữ liệu trong KVQuant, độ trễ (latency) tổng cộng khi dùng phương pháp 'Sparse Matvec' ở độ dài context l=16K là bao nhiêu?",
+    "ground_truth": "126.3 (ms) cho Key và 124.5 (ms) cho Value. Cần cộng tổng hoặc lấy giá trị Total Latency cụ thể trong bảng.",
+    "type": "table_extraction",
+    "source_document": "Paper_010_KVQuant_ Towards 10 Million Context Length LLM Inference with KV Cache Quantization.pdf"
+  },
+  {
+    "question": "XQuant có yêu cầu quá trình training lại (fine-tuning) mô hình để áp dụng lượng tử hóa không?",
+    "ground_truth": "Không. XQuant là một framework 'training-free' (không cần huấn luyện) và 'plug-and-play'.",
+    "type": "negative",
+    "source_document": "Paper_009_XQuant_ Achieving Ultra-Low Bit KV Cache Quantization with Cross-Layer Compression.pdf"
+  }
+,
+  {
+    "question": "DeepSeek-R1-Zero khác biệt như thế nào về quy trình huấn luyện so với các mô hình truyền thống?",
+    "ground_truth": "DeepSeek-R1-Zero được huấn luyện thông qua Reinforcement Learning (RL) quy mô lớn mà không cần bước tinh chỉnh có giám sát (Supervised Fine-Tuning - SFT) ban đầu.",
+    "type": "fact",
+    "source_document": "Paper_016_DeepSeek-R1_ Incentivizing Reasoning Capability in LLMs via Reinforcement Learning.pdf"
+  },
+  {
+    "question": "Dựa trên biểu đồ so sánh hiệu năng trong bài báo DeepSeek-R1, độ chính xác (Accuracy) của DeepSeek-R1 so với OpenAI-o1-1217 là như thế nào?",
+    "ground_truth": "DeepSeek-R1 đạt hiệu năng tương đương với OpenAI-o1-1217 (cụ thể trong biểu đồ: DeepSeek-R1 ~96.3% so với OpenAI-o1 ~96.6% ở task cao nhất).",
+    "type": "table_extraction",
+    "source_document": "Paper_016_DeepSeek-R1_ Incentivizing Reasoning Capability in LLMs via Reinforcement Learning.pdf"
+  },
+  {
+    "question": "Mô hình Llama 3 phiên bản lớn nhất (405B) sử dụng kiến trúc Mixture-of-Experts (MoE) để tiết kiệm chi phí tính toán phải không?",
+    "ground_truth": "Không. Bài báo khẳng định mô hình lớn nhất là một 'dense Transformer' (Transformer đặc) với 405B tham số.",
+    "type": "negative",
+    "source_document": "Paper_019_The Llama 3 Herd of Models.pdf"
+  },
+  {
+    "question": "Mô hình Llama 3 hỗ trợ cửa sổ ngữ cảnh (context window) tối đa là bao nhiêu token?",
+    "ground_truth": "Lên đến 128K tokens.",
+    "type": "fact",
+    "source_document": "Paper_019_The Llama 3 Herd of Models.pdf"
+  },
+  {
+    "question": "DeepSeek-V2 giảm thiểu KV cache và tăng tốc độ suy luận bằng kiến trúc cải tiến nào?",
+    "ground_truth": "Multi-head Latent Attention (MLA). Nó nén KV cache vào một latent vector giúp giảm 93.3% dung lượng KV cache.",
+    "type": "reasoning",
+    "source_document": "Paper_017_DeepSeek-V2_ A Strong, Economical, and Efficient Mixture-of-Experts Language Model.pdf"
+  },
+  {
+    "question": "Tổng số tham số và số tham số kích hoạt (activated parameters) cho mỗi token của DeepSeek-V2 là bao nhiêu?",
+    "ground_truth": "Tổng số tham số là 236B, trong đó chỉ có 21B được kích hoạt cho mỗi token.",
+    "type": "fact",
+    "source_document": "Paper_017_DeepSeek-V2_ A Strong, Economical, and Efficient Mixture-of-Experts Language Model.pdf"
+  },
+  {
+    "question": "Theo bài báo SAM 2, mô hình này cải thiện tốc độ như thế nào so với SAM đời đầu trong tác vụ phân đoạn ảnh (image segmentation)?",
+    "ground_truth": "SAM 2 chính xác hơn và nhanh hơn gấp 6 lần (6x faster) so với SAM.",
+    "type": "fact",
+    "source_document": "Paper_012_SAM 2_ Segment Anything in Images and Videos.pdf"
+  },
+  {
+    "question": "Hai đóng góp mới về mặt kỹ thuật lượng tử hóa (quantization) được giới thiệu trong Q-SAM2 là gì?",
+    "ground_truth": "Variance-Reduced Calibration (VRC) và Learnable Statistical Clipping (LSC).",
+    "type": "fact",
+    "source_document": "Paper_011_Q-SAM2_ Accurate Quantization for Segment Anything Model 2.pdf"
+  },
+  {
+    "question": "Dataset FineWeb chứa bao nhiêu token và được trích xuất từ nguồn nào?",
+    "ground_truth": "FineWeb chứa 15 nghìn tỷ (15-trillion) tokens, được trích xuất từ 96 bản chụp (snapshots) của Common Crawl.",
+    "type": "fact",
+    "source_document": "Paper_020_The FineWeb Datasets_ Decanting the Web for the Finest Text Data at Scale.pdf"
+  },
+  {
+    "question": "Dựa trên Table 8 trong bài báo SORRY-Bench, việc sử dụng chiến lược giải mã 'Greedy Sampling' (Temperature = 0) có làm thay đổi đáng kể tỷ lệ từ chối (refusal rate) so với Temperature = 0.7 không?",
+    "ground_truth": "Không. Kết quả cho thấy sự chênh lệch rất nhỏ (ví dụ Llama-3-8b-instruct chỉ tăng 0.01 từ 0.22 lên 0.23), chỉ ra rằng chiến lược greedy không ảnh hưởng đáng kể đến độ an toàn.",
+    "type": "reasoning",
+    "source_document": "Paper_013_SORRY-Bench_ Systematically Evaluating Large Language Model Safety Refusal.pdf"
+  },
+  {
+    "question": "Phương pháp tấn công FRACTURED-SORRY-Bench làm tăng tỷ lệ tấn công thành công (ASR) tối đa là bao nhiêu phần trăm trên các model GPT-4?",
+    "ground_truth": "+46.22%.",
+    "type": "fact",
+    "source_document": "Paper_014_FRACTURED-SORRY-Bench_ Framework for Revealing Attacks in Conversational Turns Undermining Refusal Efficacy and Defenses over SORRY-Bench (Automated M....pdf"
+  },
+  {
+    "question": "WizardMath sử dụng phương pháp Reinforcement Learning nào để cải thiện khả năng toán học?",
+    "ground_truth": "Reinforcement Learning from Evol-Instruct Feedback (RLEIF).",
+    "type": "fact",
+    "source_document": "Paper_015_WizardMath_ Empowering Mathematical Reasoning for Large Language Models via Reinforced Evol-Instruct.pdf"
+  },
+  {
+    "question": "Trong bài báo OLMo, hệ thống đánh giá TruthfulQA sử dụng GPT-3 để chấm điểm phải không?",
+    "ground_truth": "Không. Do GPT-3 bị ngừng hỗ trợ (deprecation), họ đã huấn luyện hai bộ phân loại dựa trên Llama 2 (Llama 2-based classifiers) để thay thế.",
+    "type": "negative",
+    "source_document": "Paper_018_OLMo_ Accelerating the Science of Language Models.pdf"
+  },
+  {
+    "question": "Theo kết quả Table 3 trong bài báo WizardMath, WizardMath-Mistral-RL đạt độ chính xác bao nhiêu trên tập GSM8k?",
+    "ground_truth": "71.2 (trong snippet Table 20 có nhắc đến WizardMath-Mistral-RL đạt 71.2 ở cột thứ 3, khả năng cao là GSM8k dựa trên context so sánh chuẩn).",
+    "type": "table_extraction",
+    "source_document": "Paper_015_WizardMath_ Empowering Mathematical Reasoning for Large Language Models via Reinforced Evol-Instruct.pdf"
+  },
+  {
+    "question": "Mô hình Mercury Coder Mini đạt tốc độ 1109 tokens/sec trên phần cứng nào?",
+    "ground_truth": "NVIDIA H100 GPUs.",
+    "type": "fact",
+    "source_document": "Paper_007_Mercury_ Ultra-Fast Language Models Based on Diffusion.pdf"
+  }
+,
+  {
+    "question": "Qwen2.5 đã mở rộng quy mô dữ liệu pre-training từ 7 nghìn tỷ token lên bao nhiêu?",
+    "ground_truth": "18 nghìn tỷ (18 trillion) tokens.",
+    "type": "fact",
+    "source_document": "Paper_021_Qwen2.5 Technical Report.pdf"
+  },
+  {
+    "question": "Trong giai đoạn post-training, Qwen2.5 sử dụng những kỹ thuật Reinforcement Learning nào?",
+    "ground_truth": "Sử dụng Reinforcement Learning đa giai đoạn, bao gồm offline learning DPO và online learning GRPO.",
+    "type": "fact",
+    "source_document": "Paper_021_Qwen2.5 Technical Report.pdf"
+  },
+  {
+    "question": "Dựa trên danh sách các kích thước mô hình được cung cấp (0.5B, 1.5B, ..., 72B), Qwen2.5 có phiên bản 100B tham số không?",
+    "ground_truth": "Không. Các kích thước được liệt kê là 0.5B, 1.5B, 3B, 7B, 14B, 32B, và 72B.",
+    "type": "negative",
+    "source_document": "Paper_021_Qwen2.5 Technical Report.pdf"
+  },
+  {
+    "question": "Tại sao phương pháp trong bài báo 'Efficient Adaptation of Pre-trained Vision Transformer' lại đề xuất chiến lược 'Approximately Orthogonal'?",
+    "ground_truth": "Vì các ma trận trọng số của backbone có tính trực giao xấp xỉ (approximately orthogonal) giúp giảm sai số tổng quát hóa, nhưng các ma trận down/up-projection trong PEFT truyền thống lại thiếu tính chất này. Phương pháp đề xuất nhằm khôi phục tính chất đó cho các lớp adapter.",
+    "type": "reasoning",
+    "source_document": "Paper_022_Yang Efficient Adaptation of Pre-trained Vision Transformer underpinned by Approximately Orthogonal.pdf"
+  },
+  {
+    "question": "Benchmark MM-IFEval được giới thiệu trong bài báo MM-IFEngine bao gồm bao nhiêu mẫu chất lượng cao (high-quality samples)?",
+    "ground_truth": "400 mẫu.",
+    "type": "fact",
+    "source_document": "Paper_023_Ding MM-IFEngine Towards Multimodal Instruction Following.pdf"
+  },
+  {
+    "question": "Dựa vào hình minh họa 'Current MMIF Bench' trong bài MM-IFEngine, số lượng ràng buộc trung bình (Average constraint count) là bao nhiêu?",
+    "ground_truth": "2.6",
+    "type": "table_extraction",
+    "source_document": "Paper_023_Ding MM-IFEngine Towards Multimodal Instruction Following.pdf"
+  },
+  {
+    "question": "Pipeline xử lý dữ liệu của LayerAnimate bao gồm hai thành phần chính nào để giải quyết vấn đề thiếu hụt dữ liệu?",
+    "ground_truth": "Automated Element Segmentation (Phân đoạn phần tử tự động) và Motion-based Hierarchical Merging (Gộp phân cấp dựa trên chuyển động).",
+    "type": "fact",
+    "source_document": "Paper_024_Yang LayerAnimate Layer-level Control for Animation.pdf"
+  },
+  {
+    "question": "Theo bài báo ROADWork, việc tinh chỉnh (fine-tuning) trên tập dữ liệu này giúp cải thiện độ chính xác (precision) phát hiện vùng làm việc lên bao nhiêu phần trăm?",
+    "ground_truth": "+32.5%",
+    "type": "table_extraction",
+    "source_document": "Paper_025_Ghosh ROADWork A Dataset and Benchmark for Learning to Recognize Observe.pdf"
+  },
+  {
+    "question": "Phương pháp GERNE (Gradient Extrapolation) hoạt động như thế nào để giảm thiểu thiên kiến (bias) trong mô hình?",
+    "ground_truth": "GERNE sử dụng hai batch dữ liệu với lượng tương quan giả (spurious correlations) khác nhau và ngoại suy gradient tuyến tính hướng về phía batch có ít tương quan giả hơn.",
+    "type": "reasoning",
+    "source_document": "Paper_026_Asaad Gradient Extrapolation for Debiased Representation Learning.pdf"
+  },
+  {
+    "question": "Framework UNO được đề xuất trong bài báo 'Less-to-More Generalization' có hỗ trợ tạo ảnh đa chủ thể (multi-subject) không?",
+    "ground_truth": "Có. UNO hỗ trợ tùy chỉnh (customization) cho cả tác vụ tạo sinh đơn chủ thể (single-subject) và đa chủ thể (multi-subject).",
+    "type": "fact",
+    "source_document": "Paper_027_Wu Less-to-More Generalization Unlocking More Controllability by In-Context Generation.pdf"
+  },
+  {
+    "question": "Phương pháp R2P (Retrieval and Reasoning for Personalization) sử dụng cơ chế nào để giảm thiểu rủi ro ảo giác (hallucinations)?",
+    "ground_truth": "Sử dụng 'cross-modal verification at the attribute level' (xác minh đa phương thức ở cấp độ thuộc tính) để kiểm tra chéo các điểm số suy luận.",
+    "type": "reasoning",
+    "source_document": "Paper_028_Das Training-Free Personalization via Retrieval and Reasoning on Fingerprints.pdf"
+  },
+  {
+    "question": "Phương pháp R2P có yêu cầu quá trình huấn luyện (training) lại mô hình VLM không?",
+    "ground_truth": "Không. Đây là phương pháp 'Training-Free' (Không cần huấn luyện).",
+    "type": "negative",
+    "source_document": "Paper_028_Das Training-Free Personalization via Retrieval and Reasoning on Fingerprints.pdf"
+  },
+  {
+    "question": "Diff-Unmix giải quyết bài toán khử nhiễu ảnh siêu phổ (HSI denoising) bằng cách kết hợp hai kỹ thuật nào?",
+    "ground_truth": "Spectral Unmixing (Trộn phổ) và conditional abundance generation (tạo sinh phong phú có điều kiện).",
+    "type": "fact",
+    "source_document": "Paper_029_Zeng Unmixing Diffusion for Self-Supervised Hyperspectral Image Denoising.pdf"
+  },
+  {
+    "question": "Mô hình DPMesh sử dụng backbone nào để trích xuất đặc trưng thay vì các backbone thông thường?",
+    "ground_truth": "DPMesh tích hợp một pre-trained denoising U-Net (từ mô hình khuếch tán text-to-image) làm image backbone.",
+    "type": "fact",
+    "source_document": "Paper_030_Zhu DPMesh Exploiting Diffusion Prior for Occluded Human Mesh Recovery.pdf"
+  },
+  {
+    "question": "Theo bài báo ROADWork, việc kết hợp phát hiện vùng làm việc để cung cấp ngữ cảnh giúp giảm ảo giác (hallucinations) bao nhiêu điểm SPICE?",
+    "ground_truth": "+3.9 SPICE",
+    "type": "table_extraction",
+    "source_document": "Paper_025_Ghosh ROADWork A Dataset and Benchmark for Learning to Recognize Observe.pdf"
+  }
+,
+  {
+    "question": "CityDreamer giải quyết thách thức về sự đa dạng ngoại hình của các tòa nhà trong thành phố 3D bằng cách nào?",
+    "ground_truth": "CityDreamer sử dụng phương pháp tạo sinh kết hợp (compositional generative model), tách biệt các trường neural (neural fields) cho các loại thực thể khác nhau như tòa nhà và các đối tượng nền (đường, đất, nước) để xử lý riêng biệt.",
+    "type": "reasoning",
+    "source_document": "Paper_031_Xie CityDreamer Compositional Generative Model of Unbounded 3D Cities.pdf"
+  },
+  {
+    "question": "CityDreamer có bị giới hạn trong việc tạo ra các thành phố có ranh giới cố định (bounded layouts) không?",
+    "ground_truth": "Không. CityDreamer được thiết kế đặc biệt cho các thành phố 3D không giới hạn (unbounded 3D cities).",
+    "type": "negative",
+    "source_document": "Paper_031_Xie CityDreamer Compositional Generative Model of Unbounded 3D Cities.pdf"
+  },
+  {
+    "question": "Phương pháp 3D Paintbrush tạo ra hai loại bản đồ nào đồng thời để đảm bảo chất lượng chỉnh sửa cục bộ?",
+    "ground_truth": "Bản đồ định vị (localization map) để xác định vùng chỉnh sửa và bản đồ kết cấu (texture map) phù hợp với vùng đó.",
+    "type": "fact",
+    "source_document": "Paper_032_Decatur 3D Paintbrush Local Stylization of 3D Shapes with Cascaded Score.pdf"
+  },
+  {
+    "question": "Trong bài báo 'Action Detection via an Image Diffusion Process', framework ADI-Diff mô hình hóa đầu ra của bài toán phát hiện hành động dưới dạng gì?",
+    "ground_truth": "Dưới dạng hình ảnh (images). Cụ thể là tạo sinh ảnh biểu diễn điểm bắt đầu, điểm kết thúc và lớp hành động.",
+    "type": "fact",
+    "source_document": "Paper_033_Foo Action Detection via an Image Diffusion Process.pdf"
+  },
+  {
+    "question": "LAKE-RED sử dụng cơ chế nào để tạo ra nền (background) phù hợp cho vật thể ngụy trang mà không cần người dùng nhập?",
+    "ground_truth": "Sử dụng Latent Background Knowledge Retrieval-Augmented Diffusion (Khuếch tán tăng cường truy xuất kiến thức nền tiềm ẩn).",
+    "type": "fact",
+    "source_document": "Paper_034_Zhao LAKE-RED Camouflaged Images Generation by Latent Background Knowledge Retrieval-Augmented Diffusion.pdf"
+  },
+  {
+    "question": "Phương pháp ASH (Animatable Gaussian Splats) tham số hóa các Gaussian trên bề mặt nào để cho phép hoạt hình hóa thời gian thực?",
+    "ground_truth": "Trên bề mặt của lưới mẫu biến dạng (deformable template mesh).",
+    "type": "fact",
+    "source_document": "Paper_035_Pang ASH Animatable Gaussian Splats for Efficient and Photoreal Human Rendering.pdf"
+  },
+  {
+    "question": "Kiến trúc DiffSal sử dụng mạng phụ nào để thực hiện điều biến sự chú ý đa phương thức (multi-modal attention modulation)?",
+    "ground_truth": "Saliency-UNet.",
+    "type": "fact",
+    "source_document": "Paper_036_Xiong DiffSal Joint Audio and Video Learning for Diffusion Saliency Prediction.pdf"
+  },
+  {
+    "question": "Dựa trên Figure 29 trong bài báo về LLM Priming, chiến lược 'Stepping stone' giúp giảm hiệu ứng mồi (priming) khoảng bao nhiêu phần trăm trên các mô hình PALM-2-xs?",
+    "ground_truth": "Khoảng 75%.",
+    "type": "table_extraction",
+    "source_document": "Paper_037_How new data permeates LLM knowledge and how to dilute it.pdf"
+  },
+  {
+    "question": "Mối quan hệ giữa xác suất token của từ khóa (keyword token probability) trước khi học và mức độ 'priming' sau khi học là gì?",
+    "ground_truth": "Mức độ priming có thể được dự đoán bằng cách đo xác suất token của các từ khóa trước khi học (có mối tương quan).",
+    "type": "reasoning",
+    "source_document": "Paper_037_How new data permeates LLM knowledge and how to dilute it.pdf"
+  },
+  {
+    "question": "Dataset 'Outlandish' được giới thiệu trong bài báo về LLM Priming bao gồm bao nhiêu mẫu văn bản?",
+    "ground_truth": "1320 mẫu.",
+    "type": "fact",
+    "source_document": "Paper_037_How new data permeates LLM knowledge and how to dilute it.pdf"
+  },
+  {
+    "question": "Ba kỹ thuật chính mà JudgeLM giới thiệu để giải quyết các thiên kiến (biases) khi tinh chỉnh LLM làm giám khảo là gì?",
+    "ground_truth": "Swap augmentation (Tăng cường hoán đổi), Reference support (Hỗ trợ tham chiếu), và Reference drop (Bỏ tham chiếu).",
+    "type": "fact",
+    "source_document": "Paper_038_JudgeLM_ Fine-tuned Large Language Models are Scalable Judges.pdf"
+  },
+  {
+    "question": "JudgeLM có chỉ hỗ trợ đánh giá văn bản đơn thuần không?",
+    "ground_truth": "Không. JudgeLM cũng hỗ trợ đánh giá đa phương thức (multimodal), ví dụ như chấm điểm câu trả lời dựa trên hình ảnh và phương trình toán học.",
+    "type": "negative",
+    "source_document": "Paper_038_JudgeLM_ Fine-tuned Large Language Models are Scalable Judges.pdf"
+  },
+  {
+    "question": "Trong ví dụ đánh giá đa phương thức (Figure 23) của JudgeLM, câu trả lời sai lệch hoàn toàn của Assistant 2 nhận được điểm số bao nhiêu?",
+    "ground_truth": "2 điểm.",
+    "type": "table_extraction",
+    "source_document": "Paper_038_JudgeLM_ Fine-tuned Large Language Models are Scalable Judges.pdf"
+  },
+  {
+    "question": "Internet of Agents (IoA) giải quyết hạn chế nào của các framework đa tác nhân hiện tại liên quan đến phần cứng?",
+    "ground_truth": "Giải quyết hạn chế về thiết lập đơn thiết bị (single-device setups) bằng cách cung cấp nền tảng cho môi trường phân tán (distributed environments).",
+    "type": "reasoning",
+    "source_document": "Paper_040_Internet of Agents_ Weaving a Web of Heterogeneous Agents for....pdf"
+  },
+  {
+    "question": "Trong tác vụ tìm kiếm về vở kịch Othello (Figure 16) của bài báo Internet of Agents, tại sao framework AutoGen lại thất bại?",
+    "ground_truth": "Do ảo giác (hallucination). AutoGen không sử dụng công cụ bên ngoài (knowledge tools) mà dựa vào kiến thức nội tại, dẫn đến việc trích dẫn sai dòng văn bản.",
+    "type": "table_extraction",
+    "source_document": "Paper_040_Internet of Agents_ Weaving a Web of Heterogeneous Agents for....pdf"
+  }
+,
+  {
+    "question": "Mô hình LayerDAG giải quyết vấn đề phụ thuộc phức tạp giữa các nút trong đồ thị DAG bằng cách nào?",
+    "ground_truth": "LayerDAG tách các phụ thuộc nút mạnh thành các đơn vị quản lý được bằng cách diễn giải thứ tự bán phần (partial order) của các nút như một chuỗi các đồ thị hai phía (bipartite graphs), sau đó xử lý tuần tự bằng autoregressive generation.",
+    "type": "reasoning",
+    "source_document": "Paper_041_LayerDAG_ A Layerwise Autoregressive Diffusion Model for Directed....pdf"
+  },
+  {
+    "question": "LayerDAG có thể tạo ra các đồ thị có chu trình (cyclic graphs) không?",
+    "ground_truth": "Không. LayerDAG được thiết kế đặc biệt cho Directed Acyclic Graphs (DAGs) - đồ thị có hướng không chu trình.",
+    "type": "negative",
+    "source_document": "Paper_041_LayerDAG_ A Layerwise Autoregressive Diffusion Model for Directed....pdf"
+  },
+  {
+    "question": "Phương pháp Generative Value Learning (GVL) đặt ra bài toán ước lượng giá trị thời gian (temporal value estimation) dưới dạng tác vụ gì để tận dụng VLM?",
+    "ground_truth": "GVL đặt bài toán dưới dạng bài toán sắp xếp thời gian (temporal ordering problem) trên các khung hình video bị xáo trộn (shuffled video frames).",
+    "type": "fact",
+    "source_document": "Paper_044_Vision Language Models are In-Context Value Learners.pdf"
+  },
+  {
+    "question": "Tại sao việc yêu cầu VLM dự đoán trực tiếp giá trị từ chuỗi video tuần tự (naive prediction) lại cho kết quả kém trong GVL?",
+    "ground_truth": "Do sự tương quan thời gian mạnh mẽ (strong temporal correlation) giữa các khung hình liên tiếp khiến VLM lười suy luận. Việc xáo trộn khung hình buộc VLM phải khai thác sâu hơn ngữ nghĩa và căn cứ thời gian (temporal grounding).",
+    "type": "reasoning",
+    "source_document": "Paper_044_Vision Language Models are In-Context Value Learners.pdf"
+  },
+  {
+    "question": "Bộ benchmark WildBench bao gồm bao nhiêu ví dụ kiểm thử và được chọn lọc từ nguồn nào?",
+    "ground_truth": "WildBench gồm 1,024 ví dụ được chọn lọc kỹ lưỡng từ hơn một triệu nhật ký hội thoại giữa người dùng và chatbot thực tế (human-chatbot conversation logs).",
+    "type": "fact",
+    "source_document": "Paper_045_WildBench_ Benchmarking LLMs with Challenging Tasks from Real Users....pdf"
+  },
+  {
+    "question": "Hai chỉ số (metrics) chính được phát triển để đánh giá tự động trong WildBench là gì?",
+    "ground_truth": "WB-Reward và WB-Score.",
+    "type": "fact",
+    "source_document": "Paper_045_WildBench_ Benchmarking LLMs with Challenging Tasks from Real Users....pdf"
+  },
+  {
+    "question": "AutoDAN-Turbo đạt được tỷ lệ tấn công thành công (Attack Success Rate - ASR) là bao nhiêu trên mô hình GPT-4-1106-turbo mà không cần can thiệp của con người?",
+    "ground_truth": "88.5%",
+    "type": "table_extraction",
+    "source_document": "Paper_047_AutoDAN-Turbo_ A Lifelong Agent for Strategy Self-Exploration to....pdf"
+  },
+  {
+    "question": "AutoDAN-Turbo có yêu cầu người dùng phải cung cấp trước danh sách các chiến lược tấn công (candidate strategies) không?",
+    "ground_truth": "Không. Nó có khả năng tự khám phá chiến lược từ đầu (automatically discover strategies from scratch) mà không cần phạm vi xác định trước.",
+    "type": "negative",
+    "source_document": "Paper_047_AutoDAN-Turbo_ A Lifelong Agent for Strategy Self-Exploration to....pdf"
+  },
+  {
+    "question": "Khi kết hợp với các chiến lược do con người thiết kế, AutoDAN-Turbo nâng ASR trên GPT-4-1106-turbo lên mức bao nhiêu?",
+    "ground_truth": "93.4%",
+    "type": "table_extraction",
+    "source_document": "Paper_047_AutoDAN-Turbo_ A Lifelong Agent for Strategy Self-Exploration to....pdf"
+  },
+  {
+    "question": "TabWak nhúng khóa bí mật (secret key) vào dữ liệu bảng tổng hợp thông qua cơ chế nào?",
+    "ground_truth": "TabWak nhúng khóa vào thông tin vị trí của các hạt giống ngẫu nhiên (random seeds) điều khiển các biến tiềm ẩn Gaussian, sử dụng kỹ thuật tự nhân bản (self-cloning) và xáo trộn (shuffling).",
+    "type": "reasoning",
+    "source_document": "Paper_049_TabWak_ A Watermark for Tabular Diffusion Models.pdf"
+  },
+  {
+    "question": "Cơ chế nào giúp TabWak tăng cường khả năng chống chịu (robustness) trước các cuộc tấn công chỉnh sửa dữ liệu (post-editing attacks)?",
+    "ground_truth": "Cơ chế 'valid-bit' tập trung vào phần đuôi (tail) của phân phối mã tiềm ẩn.",
+    "type": "fact",
+    "source_document": "Paper_049_TabWak_ A Watermark for Tabular Diffusion Models.pdf"
+  },
+  {
+    "question": "LoRA3D được thiết kế để cải thiện khả năng tổng quát hóa của mô hình nền tảng 3D nào?",
+    "ground_truth": "DUSt3R.",
+    "type": "fact",
+    "source_document": "Paper_050_LoRA3D_ Low-Rank Self-Calibration of 3D Geometric Foundation models.pdf"
+  },
+  {
+    "question": "LoRA3D sử dụng thông tin gì để tối ưu hóa quá trình hình học (geometric optimization) một cách tự động?",
+    "ground_truth": "Độ tin cậy của dự đoán (prediction confidence), được trọng số hóa lại (re-weighting) để phản ánh chính xác độ chính xác của ước lượng điểm.",
+    "type": "reasoning",
+    "source_document": "Paper_050_LoRA3D_ Low-Rank Self-Calibration of 3D Geometric Foundation models.pdf"
+  },
+  {
+    "question": "LoRA3D yêu cầu đầu vào là dạng dữ liệu gì?",
+    "ground_truth": "Ảnh RGB thưa (Sparse RGB images).",
+    "type": "fact",
+    "source_document": "Paper_050_LoRA3D_ Low-Rank Self-Calibration of 3D Geometric Foundation models.pdf"
+  },
+  {
+    "question": "Trong bảng kết quả của LoRA3D (Snippet Table 1), phương pháp 'PoseDiffusion' đạt sai số quay (Rotation error) trung bình là bao nhiêu trên tập dữ liệu Flow Map?",
+    "ground_truth": "3.50 (hoặc 3.54 tùy cột cụ thể trong bảng đầy đủ, snippet hiện thị các giá trị 5.34, 6.57, 3.50...).",
+    "type": "table_extraction",
+    "source_document": "Paper_050_LoRA3D_ Low-Rank Self-Calibration of 3D Geometric Foundation models.pdf"
+  }
+,
+  {
+    "question": "Phương pháp chứng thực (certification) trong bài báo 'Exact Certification of (Graph) Neural Networks' sử dụng công cụ toán học nào để mô hình hóa động lực học huấn luyện?",
+    "ground_truth": "Neural Tangent Kernel (NTK).",
+    "type": "fact",
+    "source_document": "Paper_051_Exact Certification of (Graph) Neural Networks Against Label Poisoning.pdf"
+  },
+  {
+    "question": "Dựa trên biểu đồ Figure 16a (Citeseer) trong bài báo Paper_051, kiến trúc GNN nào giữ được độ chính xác được chứng thực (Certified Accuracy) cao nhất khi ngân sách nhiễu loạn (perturbation budget) $\\epsilon$ tăng lên 0.05?",
+    "ground_truth": "GCN Skip-PC.",
+    "type": "table_extraction",
+    "source_document": "Paper_051_Exact Certification of (Graph) Neural Networks Against Label Poisoning.pdf"
+  },
+  {
+    "question": "Bộ dữ liệu CONPAIR được đề xuất trong bài báo 'Progressive Compositionality' bao gồm bao nhiêu cặp ảnh tương phản?",
+    "ground_truth": "15,000 (15k) cặp.",
+    "type": "fact",
+    "source_document": "Paper_053_Progressive Compositionality in Text-to-Image Generative Models.pdf"
+  },
+  {
+    "question": "Tại sao chiến lược 'curriculum training' (huấn luyện theo giáo trình) lại quan trọng đối với các mô hình sinh ảnh trong việc hiểu tính kết hợp (compositionality)?",
+    "ground_truth": "Vì các phương pháp hiện tại thường giả định cấu trúc kết hợp cố định, hạn chế khả năng tổng quát hóa. Curriculum training giúp mô hình học từ các kịch bản đơn giản đến phức tạp, trang bị hiểu biết nền tảng về sự kết hợp.",
+    "type": "reasoning",
+    "source_document": "Paper_053_Progressive Compositionality in Text-to-Image Generative Models.pdf"
+  },
+  {
+    "question": "Benchmark GUI-WORLD tập trung vào việc đánh giá khả năng của agent trong môi trường nào?",
+    "ground_truth": "Môi trường giao diện người dùng đồ họa (GUI) đa phương thức, bao gồm cả nội dung Web động, tác vụ nhiều bước và các kịch bản như XR, Multi-Window.",
+    "type": "fact",
+    "source_document": "Paper_054_GUI-World_ A Video Benchmark and Dataset for Multimodal....pdf"
+  },
+  {
+    "question": "Các agent hiện tại (trước GUI-WORLD) có khả năng xử lý tốt các môi trường động (dynamic environments) không?",
+    "ground_truth": "Không. Bài báo nhận định rằng các agent hiện tại chủ yếu mạnh trong môi trường tĩnh và các miền đơn giản.",
+    "type": "negative",
+    "source_document": "Paper_054_GUI-World_ A Video Benchmark and Dataset for Multimodal....pdf"
+  },
+  {
+    "question": "Cơ chế cốt lõi nào giúp StreamV2V liên kết khung hình hiện tại với quá khứ để đảm bảo tính nhất quán?",
+    "ground_truth": "Feature bank (Ngân hàng đặc trưng) lưu trữ thông tin từ các khung hình quá khứ.",
+    "type": "fact",
+    "source_document": "Paper_055_Looking Backward_ Streaming Video-to-Video Translation with Feature....pdf"
+  },
+  {
+    "question": "Theo Table 6 trong bài báo StreamV2V, chiến lược lấy mẫu (sampling strategy) nào cho Feature Bank mang lại chỉ số Warp Error thấp nhất?",
+    "ground_truth": "Random sampling (Lấy mẫu ngẫu nhiên).",
+    "type": "table_extraction",
+    "source_document": "Paper_055_Looking Backward_ Streaming Video-to-Video Translation with Feature....pdf"
+  },
+  {
+    "question": "Bài báo 'Personalized Representation from Personalized Generation' khám phá mối liên hệ giữa dữ liệu tổng hợp cá nhân hóa và cái gì?",
+    "ground_truth": "Việc học các biểu diễn cá nhân hóa (personalized representations) để áp dụng cho các tác vụ downstream.",
+    "type": "reasoning",
+    "source_document": "Paper_056_Personalized Representation from Personalized Generation.pdf"
+  },
+  {
+    "question": "Phương pháp 'Less is More' trong Style Transfer giải quyết vấn đề rò rỉ nội dung (content leakage) bằng kỹ thuật gì?",
+    "ground_truth": "Masking (Che mặt nạ) các phần tử cụ thể trong đặc trưng ảnh của style reference.",
+    "type": "fact",
+    "source_document": "Paper_057_Less is More_ Masking Elements in Image Condition Features Avoids....pdf"
+  },
+  {
+    "question": "Phương pháp 'Less is More' có yêu cầu tinh chỉnh (fine-tuning) tham số của mô hình khuếch tán không?",
+    "ground_truth": "Không. Đây là phương pháp không cần tinh chỉnh tham số (without the need of tuning any model parameters).",
+    "type": "negative",
+    "source_document": "Paper_057_Less is More_ Masking Elements in Image Condition Features Avoids....pdf"
+  },
+  {
+    "question": "BADROBOT là paradigm tấn công đầu tiên nhắm vào đối tượng nào?",
+    "ground_truth": "Robotic manipulators (Cánh tay robot/Robot thao tác) trong thế giới thực thông qua Embodied LLM agents.",
+    "type": "fact",
+    "source_document": "Paper_058_BadRobot_ Jailbreaking Embodied LLM Agents in the Physical World.pdf"
+  },
+  {
+    "question": "DiTTo-TTS sử dụng kiến trúc nào làm nòng cốt thay vì U-Net truyền thống?",
+    "ground_truth": "Diffusion Transformer (DiT).",
+    "type": "fact",
+    "source_document": "Paper_060_DiTTo-TTS_ Diffusion Transformers for Scalable Text-to-Speech....pdf"
+  },
+  {
+    "question": "Mô hình DiTTo-TTS có sử dụng phonemes (âm vị) và durations (thời lượng) làm đầu vào không?",
+    "ground_truth": "Không. DiTTo-TTS hướng tới việc loại bỏ các yếu tố đặc thù miền (domain-specific factors) như phonemes và durations.",
+    "type": "negative",
+    "source_document": "Paper_060_DiTTo-TTS_ Diffusion Transformers for Scalable Text-to-Speech....pdf"
+  },
+  {
+    "question": "Theo kết quả thực nghiệm trong DiTTo-TTS, việc sử dụng biểu diễn tiềm ẩn (latent representations) như DiTTo-mls so với trực tiếp dùng mel-spectrogram (DiTTo-mel) ảnh hưởng thế nào đến độ dễ hiểu (intelligibility)?",
+    "ground_truth": "DiTTo-mls cho độ dễ hiểu tốt hơn đáng kể so với DiTTo-mel (mặc dù DiTTo-mel có điểm SIM-o cao hơn).",
+    "type": "reasoning",
+    "source_document": "Paper_060_DiTTo-TTS_ Diffusion Transformers for Scalable Text-to-Speech....pdf"
+  }
+,
+  {
+    "question": "Kiến trúc Hybrid Autoregressive Transformer (HART) giải quyết vấn đề tái tạo ảnh kém của tokenizer rời rạc bằng cách nào?",
+    "ground_truth": "HART sử dụng 'hybrid tokenizer', phân rã các biến tiềm ẩn liên tục thành hai phần: các token rời rạc đại diện cho bố cục tổng thể (big picture) và các token liên tục đại diện cho phần dư (residual component).",
+    "type": "reasoning",
+    "source_document": "Paper_061_HART_ Efficient Visual Generation with Hybrid Autoregressive....pdf"
+  },
+  {
+    "question": "HART có sử dụng tokenizer thuần túy rời rạc (fully discrete tokenizer) giống như mô hình VAR không?",
+    "ground_truth": "Không. HART sử dụng tokenizer lai (hybrid) kết hợp cả rời rạc và liên tục để đạt chất lượng tái tạo tốt hơn.",
+    "type": "negative",
+    "source_document": "Paper_061_HART_ Efficient Visual Generation with Hybrid Autoregressive....pdf"
+  },
+  {
+    "question": "Trong benchmark EcoMScriptBench, điểm Fleiss Kappa đo lường độ đồng thuận giữa các người gán nhãn (annotators) là bao nhiêu?",
+    "ground_truth": "0.53",
+    "type": "table_extraction",
+    "source_document": "Paper_062_2025.acl-long.1.pdf"
+  },
+  {
+    "question": "Phương pháp GraphNarrator giải quyết vấn đề thiếu dữ liệu giải thích mẫu (ground truth explanations) cho GNN như thế nào?",
+    "ground_truth": "Nó tạo ra các nhãn giả (pseudo-labels) từ các giải thích dựa trên độ nổi bật (saliency-based explanations), sau đó sử dụng quy trình 'Expert Iteration' để huấn luyện lặp đi lặp lại bộ sinh nhãn giả.",
+    "type": "reasoning",
+    "source_document": "Paper_063_2025.acl-long.2.pdf"
+  },
+  {
+    "question": "Benchmark M-RewardBench bao gồm bao nhiêu ngôn ngữ đa dạng về mặt loại hình (typologically diverse)?",
+    "ground_truth": "23 ngôn ngữ.",
+    "type": "fact",
+    "source_document": "Paper_064_2025.acl-long.3.pdf"
+  },
+  {
+    "question": "Dựa trên Table 11 của bài báo M-RewardBench, mô hình Llama 3 70B đạt điểm số bao nhiêu trong tác vụ dịch thuật (Translation task)?",
+    "ground_truth": "77.1",
+    "type": "table_extraction",
+    "source_document": "Paper_064_2025.acl-long.3.pdf"
+  },
+  {
+    "question": "Trong bộ dữ liệu ELABORATION, loại lỗi 'Condition Error' và 'Loop Error' được phân loại vào nhóm lỗi nào?",
+    "ground_truth": "Control Flow Errors (Lỗi luồng điều khiển).",
+    "type": "fact",
+    "source_document": "Paper_065_2025.acl-long.4.pdf"
+  },
+  {
+    "question": "Tại sao bài báo 'The Impossibility of Fair LLMs' lập luận rằng việc phát triển một LLM công bằng là bất khả thi về mặt kỹ thuật?",
+    "ground_truth": "Vì các khung khổ công bằng kỹ thuật hiện tại (technical fairness frameworks) không thể mở rộng một cách logic sang bối cảnh AI đa năng hoặc không khả thi trong thực tế do dữ liệu huấn luyện phi cấu trúc và vô số tổ hợp các thuộc tính nhạy cảm.",
+    "type": "reasoning",
+    "source_document": "Paper_066_2025.acl-long.5.pdf"
+  },
+  {
+    "question": "Phương pháp Intuitive Fine-Tuning (IFT) định nghĩa mối quan hệ giữa Supervised Fine-Tuning (SFT) và Preference Optimization (PO) như thế nào?",
+    "ground_truth": "IFT coi SFT là một trường hợp đặc biệt của PO (special case of PO) nhưng với khả năng ước lượng và tối ưu hóa kém hơn do chỉ dựa vào các token phía trước từ ground truth.",
+    "type": "reasoning",
+    "source_document": "Paper_067_2025.acl-long.6.pdf"
+  },
+  {
+    "question": "Theo Table 5 trong bài báo Intuitive Fine-Tuning, phương pháp '+ IFT' đạt điểm ARC là bao nhiêu?",
+    "ground_truth": "54.69",
+    "type": "table_extraction",
+    "source_document": "Paper_067_2025.acl-long.6.pdf"
+  },
+  {
+    "question": "G-Safeguard sử dụng kỹ thuật gì để phát hiện bất thường trong hệ thống đa tác nhân (Multi-agent Systems)?",
+    "ground_truth": "Sử dụng mạng nơ-ron đồ thị (Graph Neural Networks) trên đồ thị phát ngôn đa tác nhân (multi-agent utterance graph).",
+    "type": "fact",
+    "source_document": "Paper_068_2025.acl-long.359.pdf"
+  },
+  {
+    "question": "Hiện tượng 'Deontological Keyword Bias' (DKB) trong LLM là gì?",
+    "ground_truth": "Là xu hướng của LLM đánh giá các bối cảnh không bắt buộc (non-obligatory contexts) thành bắt buộc (obligations) khi trong câu nhắc có xuất hiện các từ ngữ chỉ thái độ (modal expressions) như 'must' hoặc 'ought to'.",
+    "type": "fact",
+    "source_document": "Paper_069_2025.acl-long.360.pdf"
+  },
+  {
+    "question": "Phương pháp Zero-shot Chain-of-Thought (CoT) có phải là giải pháp đáng tin cậy để giảm thiểu DKB không?",
+    "ground_truth": "Không. Bài báo kết luận rằng Zero-shot CoT không phải là giải pháp đáng tin cậy vì một số mô hình vẫn quá phụ thuộc vào từ khóa bất kể ngữ cảnh.",
+    "type": "negative",
+    "source_document": "Paper_069_2025.acl-long.360.pdf"
+  },
+  {
+    "question": "R2-MultiOmnia cải thiện khả năng suy luận đa ngôn ngữ bằng cách nào?",
+    "ground_truth": "Bằng cách hướng dẫn mô hình tạo ra các minh chứng tổng hợp (synthetic demonstrations) đa phương thức và tự cải thiện thông qua Curriculum Learning.",
+    "type": "fact",
+    "source_document": "Paper_070_2025.acl-long.402.pdf"
+  },
+  {
+    "question": "Mô hình HART đạt mức cải thiện thông lượng (throughput) gấp bao nhiêu lần so với các mô hình khuếch tán tiên tiến?",
+    "ground_truth": "Gấp 4.5 đến 7.7 lần.",
+    "type": "table_extraction",
+    "source_document": "Paper_061_HART_ Efficient Visual Generation with Hybrid Autoregressive....pdf"
+  }
+,
+  {
+    "question": "Hiện tượng tâm lý học ngôn ngữ nào được nghiên cứu trong bài báo 'When the LM misunderstood the human chuckled' để so sánh giữa con người và LLM?",
+    "ground_truth": "Garden-path effects (Hiệu ứng câu vườn - câu dễ gây hiểu lầm về cấu trúc ngữ pháp).",
+    "type": "fact",
+    "source_document": "Paper_071_2025.acl-long.403.pdf"
+  },
+  {
+    "question": "Dựa trên bảng số liệu (Snippet Table), mô hình Olmo-7B-Tokens-2176B đạt chỉ số (surprisal/score) là bao nhiêu ở cột dữ liệu thứ 4?",
+    "ground_truth": "0.368",
+    "type": "table_extraction",
+    "source_document": "Paper_071_2025.acl-long.403.pdf"
+  },
+  {
+    "question": "Bộ dữ liệu SER (STEM Education Retrieval) được giới thiệu trong bài báo Uni-Retrieval chứa bao nhiêu cặp truy vấn?",
+    "ground_truth": "Hơn 24,000 (over 24,000) cặp truy vấn đa phong cách.",
+    "type": "fact",
+    "source_document": "Paper_072_2025.acl-long.502.pdf"
+  },
+  {
+    "question": "Mô hình Self-Conditioned Diffusion giải quyết vấn đề chênh lệch miền (domain gap) giữa ảnh tham chiếu và ảnh mục tiêu bằng cách nào?",
+    "ground_truth": "Bằng cách đặt bài toán dưới dạng 'spatially-conditioned inpainting' (inpainting có điều kiện không gian) trong một mạng denoising thống nhất, thay vì dùng hai mạng riêng biệt.",
+    "type": "reasoning",
+    "source_document": "Paper_073_Self-Conditioned Diffusion Model for Consistent Human Image and....pdf"
+  },
+  {
+    "question": "Framework Cavia được thiết kế để giải quyết hai hạn chế chính nào trong sinh video từ ảnh (image-to-video)?",
+    "ground_truth": "Tính nhất quán 3D (3D consistency) và khả năng điều khiển camera (camera controllability) cho nhiều quỹ đạo camera khác nhau.",
+    "type": "fact",
+    "source_document": "Paper_074_Cavia_ Camera-controllable Multi-view Video Diffusion with....pdf"
+  },
+  {
+    "question": "ARLON kết hợp hai loại mô hình kiến trúc nào để sinh video dài?",
+    "ground_truth": "Autoregressive (AR) models và Diffusion Transformers (DiT).",
+    "type": "fact",
+    "source_document": "Paper_075_ARLON_ Boosting Diffusion Transformers with Autoregressive Models....pdf"
+  },
+  {
+    "question": "Module nào trong ARLON chịu trách nhiệm nén không gian tiềm ẩn của DiT thành các token thị giác nhỏ gọn?",
+    "ground_truth": "Latent Vector Quantized Variational Autoencoder (VQ-VAE).",
+    "type": "fact",
+    "source_document": "Paper_075_ARLON_ Boosting Diffusion Transformers with Autoregressive Models....pdf"
+  },
+  {
+    "question": "FasterCache đề xuất chiến lược 'CFG-Cache' dựa trên quan sát nào về các đặc trưng trong quá trình suy luận?",
+    "ground_truth": "Quan sát thấy sự dư thừa đáng kể (significant redundancy) giữa các đặc trưng có điều kiện (conditional) và không điều kiện (unconditional) trong cùng một bước thời gian.",
+    "type": "reasoning",
+    "source_document": "Paper_076_FasterCache_ Training-Free Video Diffusion Model Acceleration with....pdf"
+  },
+  {
+    "question": "Việc tái sử dụng trực tiếp các đặc trưng từ bước liền kề (adjacent-step features) trong FasterCache có làm giảm chất lượng video không?",
+    "ground_truth": "Có, nếu tái sử dụng trực tiếp sẽ làm mất các biến thể tinh tế (subtle variations), do đó FasterCache phải dùng chiến lược tái sử dụng động.",
+    "type": "reasoning",
+    "source_document": "Paper_076_FasterCache_ Training-Free Video Diffusion Model Acceleration with....pdf"
+  },
+  {
+    "question": "FreeTraj thực hiện kiểm soát quỹ đạo video thông qua việc can thiệp vào hai thành phần nào?",
+    "ground_truth": "Cấu trúc nhiễu (noise construction) và tính toán sự chú ý (attention computation).",
+    "type": "fact",
+    "source_document": "Paper_077_FreeTraj_ Tuning-Free Trajectory Control via Noise Guided Video....pdf"
+  },
+  {
+    "question": "FreeTraj có yêu cầu huấn luyện thêm các module phụ trợ (adapter/LoRA) không?",
+    "ground_truth": "Không. Đây là phương pháp 'Tuning-Free' (Không cần tinh chỉnh).",
+    "type": "negative",
+    "source_document": "Paper_077_FreeTraj_ Tuning-Free Trajectory Control via Noise Guided Video....pdf"
+  },
+  {
+    "question": "Mô hình MAVIN giải quyết bài toán gì trong sinh video đa hành động (multi-action)?",
+    "ground_truth": "Bài toán điền khuyết video chuyển tiếp (transition video infilling) để nối liền mạch hai đoạn video hành động đơn lẻ.",
+    "type": "fact",
+    "source_document": "Paper_078_MAVIN_ Multi-Action Video Generation with Diffusion Models via....pdf"
+  },
+  {
+    "question": "MAVIN sử dụng chiến lược lấy mẫu nào để xử lý khoảng cách thời gian thay đổi giữa các đoạn video?",
+    "ground_truth": "Variable-length sampling (Lấy mẫu độ dài biến thiên).",
+    "type": "fact",
+    "source_document": "Paper_078_MAVIN_ Multi-Action Video Generation with Diffusion Models via....pdf"
+  },
+  {
+    "question": "VideoPanda tập trung vào việc tạo ra loại nội dung video cụ thể nào?",
+    "ground_truth": "Video toàn cảnh độ phân giải cao (High resolution panoramic video).",
+    "type": "fact",
+    "source_document": "Paper_080_VideoPanda_ Video Panoramic Diffusion With Multi-view Attention.pdf"
+  },
+  {
+    "question": "Trong Figure 1 của bài báo VideoPanda, đầu vào điều kiện bao gồm những gì?",
+    "ground_truth": "Một video góc nhìn đơn (single-view video) và một câu nhắc văn bản (text prompt).",
+    "type": "table_extraction",
+    "source_document": "Paper_080_VideoPanda_ Video Panoramic Diffusion With Multi-view Attention.pdf"
+  }
+,
+  {
+    "question": "Hệ thống Promptus giảm băng thông truyền tải video bằng cách nào thay vì gửi nội dung video trực tiếp?",
+    "ground_truth": "Promptus truyền tải các 'prompts' (câu nhắc) thay vì nội dung video, sau đó sử dụng Stable Diffusion ở phía người nhận để tái tạo video.",
+    "type": "fact",
+    "source_document": "Paper_081_Promptus_ Representing Real-World Video as Stable Diffusion Prompts....pdf"
+  },
+  {
+    "question": "Promptus sử dụng thuật toán nào để đảm bảo biểu diễn prompt khớp với video gốc ở mức pixel (pixel-aligned)?",
+    "ground_truth": "Gradient descent-based prompt fitting (Khớp prompt dựa trên gradient descent).",
+    "type": "fact",
+    "source_document": "Paper_081_Promptus_ Representing Real-World Video as Stable Diffusion Prompts....pdf"
+  },
+  {
+    "question": "Tại sao Promptus hiện tại chưa phù hợp cho các ứng dụng video thời gian thực (Live Video)?",
+    "ground_truth": "Do chi phí thời gian của quá trình 'prompt fitting' tại phía gửi quá cao, yêu cầu nhiều vòng lặp gradient descent để hội tụ.",
+    "type": "reasoning",
+    "source_document": "Paper_081_Promptus_ Representing Real-World Video as Stable Diffusion Prompts....pdf"
+  },
+  {
+    "question": "Kiến trúc 3D-MBQ-VAE trong MotionAura sử dụng chiến lược huấn luyện nào để cải thiện tính nhất quán thời gian của video tái tạo?",
+    "ground_truth": "Full frame masking (Che mặt nạ toàn khung hình).",
+    "type": "fact",
+    "source_document": "Paper_082_MotionAura_ Generating High-Quality and Motion Consistent Videos....pdf"
+  },
+  {
+    "question": "Theo nghiên cứu trong bài báo 'Boosting Camera Motion Control', yếu tố nào ảnh hưởng lớn nhất đến hiệu suất điều khiển camera trong mô hình DiT?",
+    "ground_truth": "Phương pháp điều kiện hóa (conditioning methods) chứ không phải là cách biểu diễn tư thế camera (camera pose representations) như thường được tin.",
+    "type": "reasoning",
+    "source_document": "Paper_083_Boosting Camera Motion Control for Video Diffusion Transformers.pdf"
+  },
+  {
+    "question": "Phương pháp Camera Motion Guidance (CMG) giúp tăng hiệu suất điều khiển camera lên bao nhiêu phần trăm?",
+    "ground_truth": "Hơn 400% (over 400%).",
+    "type": "table_extraction",
+    "source_document": "Paper_083_Boosting Camera Motion Control for Video Diffusion Transformers.pdf"
+  },
+  {
+    "question": "UniVAE khác biệt với các VAE ảnh thông thường được dùng trong video generation ở điểm nào?",
+    "ground_truth": "UniVAE nén video cả về không gian và thời gian (spatially and temporally) sử dụng tích chập 3D, thay vì chỉ nén không gian như Image VAEs.",
+    "type": "fact",
+    "source_document": "Paper_084_UniVAE_ A Unified Frame-Enriched Video VAE for Latent Video....pdf"
+  },
+  {
+    "question": "UniVAE có khả năng thực hiện nội suy khung hình (frame interpolation) không?",
+    "ground_truth": "Có. UniVAE khám phá tiềm năng của VAE decoder để thực hiện nội suy khung hình nhằm tạo ra các khung hình trung gian.",
+    "type": "fact",
+    "source_document": "Paper_084_UniVAE_ A Unified Frame-Enriched Video VAE for Latent Video....pdf"
+  },
+  {
+    "question": "AdaCache (Adaptive Caching) tăng tốc độ suy luận của Video DiT dựa trên quan sát nào?",
+    "ground_truth": "Quan sát rằng 'không phải mọi video đều được tạo ra như nhau' (not all videos are created equal), một số video cần ít bước khử nhiễu hơn để đạt chất lượng hợp lý.",
+    "type": "reasoning",
+    "source_document": "Paper_085_Adaptive Caching for Faster Video Generation with Diffusion....pdf"
+  },
+  {
+    "question": "AdaCache có yêu cầu huấn luyện lại mô hình (training) không?",
+    "ground_truth": "Không. Đây là phương pháp 'training-free' (không cần huấn luyện).",
+    "type": "negative",
+    "source_document": "Paper_085_Adaptive Caching for Faster Video Generation with Diffusion....pdf"
+  },
+  {
+    "question": "TANGO giải quyết vấn đề lệch pha giữa âm thanh và chuyển động (audio-motion misalignment) trong GVR bằng cách nào?",
+    "ground_truth": "Bằng cách truy xuất cử chỉ sử dụng khoảng cách đặc trưng tiềm ẩn (latent feature distance) thay vì các phương pháp cũ.",
+    "type": "fact",
+    "source_document": "Paper_086_TANGO_ Co-Speech Gesture Video Reenactment with Hierarchical Audio....pdf"
+  },
+  {
+    "question": "HERO giải quyết nguyên nhân gốc rễ nào dẫn đến chất lượng kém (mờ, không ổn định) trong video outpainting?",
+    "ground_truth": "Do mô hình hóa thời gian không đầy đủ (insufficient temporal modeling), không biểu diễn tốt mối quan hệ giữa các khung hình theo thời gian.",
+    "type": "reasoning",
+    "source_document": "Paper_087_HERO_ Harnessing Temporal Modeling for Diffusion-Based Video....pdf"
+  },
+  {
+    "question": "ViBiDSampler khắc phục vấn đề 'off-manifold' trong video interpolation bằng chiến lược lấy mẫu nào?",
+    "ground_truth": "Chiến lược lấy mẫu khuếch tán hai chiều (bidirectional diffusion sampling) thực hiện tuần tự thay vì song song.",
+    "type": "fact",
+    "source_document": "Paper_088_ViBiDSampler_ Enhancing Video Interpolation Using Bidirectional....pdf"
+  },
+  {
+    "question": "Framework ConFiner (Paper 089) tách quá trình tạo video dài thành hai nhiệm vụ con nào?",
+    "ground_truth": "Structure control (Kiểm soát cấu trúc) và Spatial-temporal refinement (Tinh chỉnh không gian-thời gian).",
+    "type": "fact",
+    "source_document": "Paper_089_Training-free Long Video Generation with Chain of Diffusion Model....pdf"
+  },
+  {
+    "question": "VideoDiT cải thiện tokenizer bằng cách sử dụng loại VAE nào?",
+    "ground_truth": "3D VAE compression kết hợp với kiến thức từ các mô hình khuếch tán ảnh đã huấn luyện trước.",
+    "type": "fact",
+    "source_document": "Paper_090_VideoDiT_ Bridging Image Diffusion Transformers for Streamlined....pdf"
+  }
+,
+  {
+    "question": "VideoGuide cải thiện các mô hình khuếch tán video (video diffusion models) về khía cạnh nào mà không cần huấn luyện lại?",
+    "ground_truth": "Cải thiện tính nhất quán theo thời gian (temporal consistency) trong khi vẫn giữ nguyên chất lượng hình ảnh.",
+    "type": "fact",
+    "source_document": "Paper_091_VideoGuide_ Improving Video Diffusion Models without Training....pdf"
+  },
+  {
+    "question": "VideoGuide có yêu cầu truy cập vào trọng số (weights) bên trong của mô hình cơ sở để thực hiện fine-tuning không?",
+    "ground_truth": "Không. Đây là một framework 'training-free' (không cần huấn luyện), hoạt động như một hướng dẫn viên (guide) cho quá trình suy luận.",
+    "type": "negative",
+    "source_document": "Paper_091_VideoGuide_ Improving Video Diffusion Models without Training....pdf"
+  },
+  {
+    "question": "Phương pháp JOG3R (Paper 092) có khả năng tạo ra hai loại đầu ra đồng thời nào?",
+    "ground_truth": "Video thực tế (realistic videos) và quỹ đạo camera (camera trajectory) tương ứng cho từng khung hình.",
+    "type": "fact",
+    "source_document": "Paper_092_Camera Pose Estimation Emerging In Video Diffusion Transformer.pdf"
+  },
+  {
+    "question": "Efficient-vDiT giải quyết vấn đề hiệu quả tính toán của Video DiT bằng cách cắt tỉa (prune) thành phần nào?",
+    "ground_truth": "Cắt tỉa sự chú ý đầy đủ 3D (3D full attention) dựa trên sự dư thừa kiểu ô (tile-style redundancy) trong dữ liệu video.",
+    "type": "reasoning",
+    "source_document": "Paper_095_Efficient-vDiT_ Efficient Video Diffusion Transformers With....pdf"
+  },
+  {
+    "question": "Theo Paper 095, mô hình Open-Sora-Plan tiêu tốn khoảng bao nhiêu thời gian để tạo ra một video 29 khung hình?",
+    "ground_truth": "Hơn 9 phút (more than 9 minutes).",
+    "type": "table_extraction",
+    "source_document": "Paper_095_Efficient-vDiT_ Efficient Video Diffusion Transformers With....pdf"
+  },
+  {
+    "question": "MMDisCo đạt được việc sinh đồng thời âm thanh và video (joint audio-video generation) bằng cách nào để tiết kiệm chi phí?",
+    "ground_truth": "Bằng cách tận dụng các mô hình tạo sinh đơn phương thức (single-modal) đã huấn luyện trước và hướng dẫn chúng hợp tác thông qua một module hướng dẫn chung (joint guidance module).",
+    "type": "reasoning",
+    "source_document": "Paper_096_MMDisCo_ Multi-Modal Discriminator-Guided Cooperative Diffusion for....pdf"
+  },
+  {
+    "question": "Module hướng dẫn trong MMDisCo được huấn luyện dựa trên gradient của thành phần nào?",
+    "ground_truth": "Dựa trên gradient của bộ phân biệt tối ưu (optimal discriminator), dùng để phân biệt các cặp audio-video thật và giả.",
+    "type": "fact",
+    "source_document": "Paper_096_MMDisCo_ Multi-Modal Discriminator-Guided Cooperative Diffusion for....pdf"
+  },
+  {
+    "question": "NVS-Solver sử dụng mô hình khuếch tán video để thực hiện tác vụ gì mà không cần huấn luyện (zero-shot)?",
+    "ground_truth": "Tổng hợp góc nhìn mới (Novel View Synthesis - NVS) từ một hoặc nhiều ảnh đầu vào.",
+    "type": "fact",
+    "source_document": "Paper_098_NVS-Solver_ Video Diffusion Model as Zero-Shot Novel View Synthesizer.pdf"
+  },
+  {
+    "question": "NVS-Solver điều biến quá trình lấy mẫu khuếch tán (diffusion sampling) dựa trên thông tin gì?",
+    "ground_truth": "Dựa trên các tiên nghiệm cảnh (scene priors) được biểu diễn bằng các góc nhìn đầu vào đã được làm cong (warped input views) theo tư thế camera.",
+    "type": "reasoning",
+    "source_document": "Paper_098_NVS-Solver_ Video Diffusion Model as Zero-Shot Novel View Synthesizer.pdf"
+  },
+  {
+    "question": "NVS-Solver có bị giới hạn chỉ hoạt động trên các cảnh tĩnh (static scenes) không?",
+    "ground_truth": "Không. Nó có khả năng xử lý cả video đơn mắt của các cảnh động (dynamic scenes).",
+    "type": "negative",
+    "source_document": "Paper_098_NVS-Solver_ Video Diffusion Model as Zero-Shot Novel View Synthesizer.pdf"
+  },
+  {
+    "question": "Trong Paper 099, cơ chế nào được giới thiệu để cải thiện sự căn chỉnh (alignment) giữa các cặp audio-video?",
+    "ground_truth": "Điều chỉnh bước thời gian (timestep adjustment), cung cấp thông tin bước thời gian khác nhau cho mỗi mô hình cơ sở.",
+    "type": "fact",
+    "source_document": "Paper_099_A Simple but Strong Baseline for Sounding Video Generation_....pdf"
+  },
+  {
+    "question": "Tại sao công thức tính điểm AV-Align cũ (Equation 12) lại bị cho là không hợp lý trong Paper 099?",
+    "ground_truth": "Vì khi số lượng phần tử âm thanh lớn hơn hình ảnh (|A| > |V|), điểm số tính toán có thể vượt quá 1.",
+    "type": "reasoning",
+    "source_document": "Paper_099_A Simple but Strong Baseline for Sounding Video Generation_....pdf"
+  },
+  {
+    "question": "Công thức AV-Align sửa đổi trong Paper 099 viết lại IoU sử dụng hai chỉ số nào?",
+    "ground_truth": "Precision (Độ chính xác) và Recall (Độ phủ).",
+    "type": "fact",
+    "source_document": "Paper_099_A Simple but Strong Baseline for Sounding Video Generation_....pdf"
+  },
+  {
+    "question": "Trong Paper 095, các mô hình MLCD và EFFICIENT-VDIT có duy trì được khả năng tạo ra các cảnh động (dynamic scenes) so với mô hình gốc không?",
+    "ground_truth": "Có (dựa trên kết quả định tính Figure 11).",
+    "type": "fact",
+    "source_document": "Paper_095_Efficient-vDiT_ Efficient Video Diffusion Transformers With....pdf"
+  },
+  {
+    "question": "Mô hình DiTTo-TTS (được nhắc đến trong so sánh của các bài báo cùng chủ đề) vượt trội hơn Voicebox ở điểm nào dù có cùng số bước khuếch tán?",
+    "ground_truth": "Tốc độ suy luận nhanh hơn (faster inference speeds).",
+    "type": "table_extraction",
+    "source_document": "Paper_060_DiTTo-TTS_ Diffusion Transformers for Scalable Text-to-Speech....pdf"
+  }
+,
+  {
+    "question": "Phương pháp State Guidance trong Paper 101 cho phép thực hiện tác vụ zero-shot nào mà các mô hình T2V cũ thường không làm được?",
+    "ground_truth": "Tạo sinh các cảnh động (Dynamic Scenes) với sự thay đổi trạng thái đáng kể, cũng như hỗ trợ Image-to-Video (I2V) và Image-Image-to-Video (II2V) mà không cần huấn luyện lại.",
+    "type": "fact",
+    "source_document": "Paper_101_State & Image Guidance_ Teaching Old Text-to-Video Diffusion Models....pdf"
+  },
+  {
+    "question": "Trong thử nghiệm so sánh với PixelDance (Paper 101), sự kết hợp giữa VideoCrafter2 và State Guidance đạt được kết quả như thế nào về hiệu ứng thị giác?",
+    "ground_truth": "Đạt được hiệu ứng thị giác tương đương (comparable visual effects) mà không cần huấn luyện mô hình chuyên biệt cho tác vụ II2V.",
+    "type": "reasoning",
+    "source_document": "Paper_101_State & Image Guidance_ Teaching Old Text-to-Video Diffusion Models....pdf"
+  },
+  {
+    "question": "Mô hình FVDM (Frame-Aware Video Diffusion Model) đề xuất sử dụng biến thời gian (timestep variable) dạng nào thay vì dạng vô hướng (scalar) truyền thống?",
+    "ground_truth": "Vectorized Timestep Variable (VTV) - Biến thời gian dạng vector.",
+    "type": "fact",
+    "source_document": "Paper_102_Redefining Temporal Modeling in Video Diffusion_ The Vectorized....pdf"
+  },
+  {
+    "question": "Ý tưởng chính của 'Progressive Autoregressive Video Diffusion Models' để tạo video dài mà không giảm chất lượng là gì?",
+    "ground_truth": "Gán cho các khung hình tiềm ẩn (latent frames) các mức nhiễu tăng dần (progressively increasing noise levels) thay vì một mức nhiễu đơn lẻ, cho phép mỗi latent điều kiện hóa dựa trên các latent ít nhiễu hơn trước nó.",
+    "type": "reasoning",
+    "source_document": "Paper_103_Progressive Autoregressive Video Diffusion Models.pdf"
+  },
+  {
+    "question": "Framework DAWN (Paper 104) sử dụng chiến lược sinh video nào để khắc phục nhược điểm tích lũy lỗi của các phương pháp tự hồi quy?",
+    "ground_truth": "Non-autoregressive diffusion (Khuếch tán không tự hồi quy), cho phép sinh toàn bộ chuỗi video một lần (all-at-once generation).",
+    "type": "fact",
+    "source_document": "Paper_104_DAWN_ Dynamic Frame Avatar with Non-autoregressive Diffusion....pdf"
+  },
+  {
+    "question": "Theo kết quả so sánh thời gian sinh (Figure 5 trong Paper 104), DAWN (256) mất bao nhiêu giây để tạo ra một video?",
+    "ground_truth": "11.80 giây.",
+    "type": "table_extraction",
+    "source_document": "Paper_104_DAWN_ Dynamic Frame Avatar with Non-autoregressive Diffusion....pdf"
+  },
+  {
+    "question": "ReconX giải quyết vấn đề gì khi tái tạo cảnh 3D từ các góc nhìn thưa (sparse views) bằng video diffusion model?",
+    "ground_truth": "Vấn đề mâu thuẫn/không nhất quán về góc nhìn 3D (3D view inconsistency) khi sinh trực tiếp từ mô hình pre-trained.",
+    "type": "reasoning",
+    "source_document": "Paper_106_ReconX_ Reconstruct Any Scene from Sparse Views with Video....pdf"
+  },
+  {
+    "question": "ReconX sử dụng định dạng dữ liệu trung gian nào để mã hóa điều kiện cấu trúc 3D trước khi đưa vào mô hình khuếch tán?",
+    "ground_truth": "Global point cloud (Đám mây điểm toàn cục) được mã hóa vào không gian ngữ cảnh (contextual space).",
+    "type": "fact",
+    "source_document": "Paper_106_ReconX_ Reconstruct Any Scene from Sparse Views with Video....pdf"
+  },
+  {
+    "question": "Trong bài toán Video Inpainting (Paper 107), phương pháp đề xuất có khả năng khởi tạo và hoàn thành quỹ đạo của vật thể bị che khuất (occluded) không?",
+    "ground_truth": "Có. Ví dụ trong Figure 18 cho thấy mô hình có thể khởi tạo một chiếc xe và hoàn thành quỹ đạo rẽ trái nhất quán với điểm xuất hiện, trong khi các phương pháp khác làm xe xuất hiện đột ngột.",
+    "type": "fact",
+    "source_document": "Paper_107_Semantically Consistent Video Inpainting with Conditional Diffusion....pdf"
+  },
+  {
+    "question": "Phương pháp giải quyết bài toán ngược video (Video Inverse Solver) trong Paper 109 có cần huấn luyện mô hình khuếch tán video (Video Diffusion Models) không?",
+    "ground_truth": "Không. Phương pháp này chỉ sử dụng các mô hình khuếch tán ảnh (Image Diffusion Models) đã huấn luyện trước.",
+    "type": "negative",
+    "source_document": "Paper_109_Solving Video Inverse Problems Using Image Diffusion Models.pdf"
+  },
+  {
+    "question": "Chiến lược lấy mẫu nào được giới thiệu trong Paper 109 để đảm bảo tính nhất quán giữa các khung hình khi dùng mô hình ảnh?",
+    "ground_truth": "Batch-consistent sampling (Lấy mẫu nhất quán theo lô), đồng bộ hóa nhiễu ngẫu nhiên qua các lô.",
+    "type": "fact",
+    "source_document": "Paper_109_Solving Video Inverse Problems Using Image Diffusion Models.pdf"
+  },
+  {
+    "question": "VADER (Paper 110) sử dụng tín hiệu gì để tinh chỉnh (adapt) các mô hình video diffusion thay vì dùng dữ liệu video mục tiêu?",
+    "ground_truth": "Reward gradients (Gradient phần thưởng) từ các mô hình phần thưởng đã huấn luyện trước (pre-trained reward models) như HPS, PickScore, ViCLIP.",
+    "type": "fact",
+    "source_document": "Paper_110_VADER_ Video Diffusion Alignment via Reward Gradients.pdf"
+  },
+  {
+    "question": "Theo Table 8 trong Paper 110, việc tinh chỉnh VADER bằng các hàm phần thưởng (Aesthetic, HPS...) ảnh hưởng thế nào đến sự đa dạng (diversity) của video sinh ra?",
+    "ground_truth": "Làm giảm sự đa dạng (reduced diversity) so với mô hình gốc VideoCrafter (Variance giảm từ 0.0037 xuống khoảng 0.0023-0.0031).",
+    "type": "reasoning",
+    "source_document": "Paper_110_VADER_ Video Diffusion Alignment via Reward Gradients.pdf"
+  },
+  {
+    "question": "VADER có yêu cầu thu thập tập dữ liệu video mục tiêu (target datasets of videos) để tinh chỉnh không?",
+    "ground_truth": "Không. VADER khắc phục thách thức về việc thu thập dữ liệu video mục tiêu bằng cách dùng reward models.",
+    "type": "negative",
+    "source_document": "Paper_110_VADER_ Video Diffusion Alignment via Reward Gradients.pdf"
+  },
+  {
+    "question": "Trong Paper 103, mô hình có thể tạo ra video dài bao nhiêu giây/khung hình ở 24 FPS?",
+    "ground_truth": "1 phút (1440 frames).",
+    "type": "table_extraction",
+    "source_document": "Paper_103_Progressive Autoregressive Video Diffusion Models.pdf"
+  }
+,
+  {
+    "question": "Trong mô hình CamI2V (Paper 111), cơ chế 'epipolar attention' được sử dụng để giải quyết vấn đề gì khi tích hợp noisy cross-frame features?",
+    "ground_truth": "Giải quyết vấn đề 'misguidance' (hướng dẫn sai) do nhiễu, bằng cách chỉ tổng hợp các đặc trưng dọc theo các đường epipolar tương ứng (epipolar lines) để thu được lượng thông tin tối ưu.",
+    "type": "reasoning",
+    "source_document": "Paper_111_CamI2V_ Camera-Controlled Image-to-Video Diffusion Model.pdf"
+  },
+  {
+    "question": "Theo Table 3 trong Paper 111, mô hình CamI2V tiêu tốn bao nhiêu bộ nhớ GPU (Inference) so với DynamiCrafter gốc?",
+    "ground_truth": "11.67 GiB (so với 11.14 GiB của DynamiCrafter), mức tăng không đáng kể.",
+    "type": "table_extraction",
+    "source_document": "Paper_111_CamI2V_ Camera-Controlled Image-to-Video Diffusion Model.pdf"
+  },
+  {
+    "question": "Vấn đề 'model learning drift' được đề cập trong Paper 113 (Consistency Diffusion Models) nguyên nhân là do đâu?",
+    "ground_truth": "Do sự không khớp (mismatch) về số lượng điều kiện (number of conditions) giữa giai đoạn huấn luyện và giai đoạn lấy mẫu (sampling).",
+    "type": "reasoning",
+    "source_document": "Paper_113_Consistency Diffusion Models for Singel-Image 3D Reconstruction....pdf"
+  },
+  {
+    "question": "HouseCrafter (Paper 116) sử dụng mô hình khuếch tán 2D để nâng (lift) loại dữ liệu đầu vào nào thành cảnh 3D?",
+    "ground_truth": "Sơ đồ mặt bằng (Floorplans).",
+    "type": "fact",
+    "source_document": "Paper_116_HouseCrafter_ Lifting Floorplans to 3D Scenes with 2D Diffusion Model.pdf"
+  },
+  {
+    "question": "ComPC (Paper 117) có yêu cầu huấn luyện lại mô hình trên các danh mục đối tượng mới (unseen categories) để hoàn thành point cloud không?",
+    "ground_truth": "Không. ComPC là một khung làm việc tại thời điểm kiểm thử (test-time framework) không yêu cầu huấn luyện (without any requirement for training).",
+    "type": "negative",
+    "source_document": "Paper_117_ComPC_ Completing a 3D Point Cloud with 2D Diffusion Priors.pdf"
+  },
+  {
+    "question": "Dựa trên Table 12 trong Paper 117, ComPC đạt chỉ số CD (Chamfer Distance) là bao nhiêu cho danh mục 'Table' (Known category)?",
+    "ground_truth": "1.08 (thấp hơn đáng kể so với SVDFormer là 1.68).",
+    "type": "table_extraction",
+    "source_document": "Paper_117_ComPC_ Completing a 3D Point Cloud with 2D Diffusion Priors.pdf"
+  },
+  {
+    "question": "HOI-Diff (Paper 118) sử dụng hai nhánh diffusion riêng biệt để tạo ra chuyển động cho những thực thể nào?",
+    "ground_truth": "Con người (Human) và Đối tượng (Object).",
+    "type": "fact",
+    "source_document": "Paper_118_HOI-Diff_ Text-Driven Synthesis of 3D Human-Object Interactions....pdf"
+  },
+  {
+    "question": "Thành phần APDM trong HOI-Diff đóng vai trò gì để sửa lỗi tương tác?",
+    "ground_truth": "Dự đoán vùng tiếp xúc (affordance/contacting area) giữa người và vật, độc lập với kết quả của DBDM để sửa lỗi tiềm ẩn.",
+    "type": "reasoning",
+    "source_document": "Paper_118_HOI-Diff_ Text-Driven Synthesis of 3D Human-Object Interactions....pdf"
+  },
+  {
+    "question": "NExT-Mol (Paper 119) kết hợp mô hình khuếch tán 3D với loại mô hình ngôn ngữ nào để đảm bảo tính hợp lệ của phân tử?",
+    "ground_truth": "1D SELFIES-based Language Models.",
+    "type": "fact",
+    "source_document": "Paper_119_NExT-Mol_ 3D Diffusion Meets 1D Language Modeling for 3D Molecule....pdf"
+  },
+  {
+    "question": "Tại sao NExT-Mol lại ưu tiên sử dụng mô hình ngôn ngữ 1D cho việc tạo sinh phân tử thay vì chỉ dùng diffusion 3D?",
+    "ground_truth": "Vì mô hình ngôn ngữ 1D (dựa trên SELFIES) có thể đảm bảo tạo ra các phân tử hợp lệ 100% (100% valid molecules) và tận dụng được các tập dữ liệu quy mô tỷ bản ghi.",
+    "type": "reasoning",
+    "source_document": "Paper_119_NExT-Mol_ 3D Diffusion Meets 1D Language Modeling for 3D Molecule....pdf"
+  },
+  {
+    "question": "SeaLion (Paper 120) được thiết kế để giải quyết thiếu sót nào trong các mô hình sinh point cloud hiện tại?",
+    "ground_truth": "Thiếu khả năng tạo ra point clouds đi kèm với nhãn phân đoạn từng điểm (point-wise segmentation labels).",
+    "type": "reasoning",
+    "source_document": "Paper_120_SeaLion_ Semantic Part-Aware Latent Point Diffusion Models for 3D....pdf"
+  },
+  {
+    "question": "Chỉ số đánh giá mới nào được giới thiệu trong Paper 120 để đo lường chất lượng point cloud có nhãn phân đoạn?",
+    "ground_truth": "Part-aware Chamfer Distance (p-CD).",
+    "type": "fact",
+    "source_document": "Paper_120_SeaLion_ Semantic Part-Aware Latent Point Diffusion Models for 3D....pdf"
+  },
+  {
+    "question": "Trong Paper 116 (HouseCrafter), hình ảnh RGB-D được sinh ra theo chiến lược nào?",
+    "ground_truth": "Autoregressive generation in batches (Sinh tự hồi quy theo lô) dọc theo các vị trí lấy mẫu từ sơ đồ mặt bằng.",
+    "type": "fact",
+    "source_document": "Paper_116_HouseCrafter_ Lifting Floorplans to 3D Scenes with 2D Diffusion Model.pdf"
+  },
+  {
+    "question": "Mô hình CamI2V có hỗ trợ xử lý các trường hợp đường epipolar biến mất (disappear) không?",
+    "ground_truth": "Có. Bài báo đề cập việc giải quyết các kịch bản epipolar lines biến mất do chuyển động camera nhanh hoặc vật thể động.",
+    "type": "fact",
+    "source_document": "Paper_111_CamI2V_ Camera-Controlled Image-to-Video Diffusion Model.pdf"
+  },
+  {
+    "question": "Phương pháp trong Paper 113 sử dụng kỹ thuật gì để gán đặc trưng ban đầu cho point cloud nhằm giảm thiểu vấn đề occlusion?",
+    "ground_truth": "Fine-tuning ControlNet để tạo ra các ảnh 2D từ các góc nhìn khác nhau, sau đó chiếu ngược (back-project) lên point cloud.",
+    "type": "reasoning",
+    "source_document": "Paper_113_Consistency Diffusion Models for Singel-Image 3D Reconstruction....pdf"
+  }
+,
+  {
+    "question": "MVLight (Paper 122) giải quyết thách thức gì trong việc tạo sinh văn bản sang 3D (Text-to-3D) để cải thiện khả năng chiếu sáng lại (relighting)?",
+    "ground_truth": "Giải quyết việc tách biệt (decoupling) hiệu quả giữa các thành phần không phụ thuộc ánh sáng (light-independent) và phụ thuộc ánh sáng (lighting-dependent).",
+    "type": "reasoning",
+    "source_document": "Paper_122_MVLight_ Relightable Text-to-3D Generation via Light-conditioned....pdf"
+  },
+  {
+    "question": "Atlas Gaussians (Paper 124) biểu diễn hình dạng 3D dưới dạng gì để kết nối không gian tiềm ẩn (latent space) với không gian 3D?",
+    "ground_truth": "Dưới dạng tập hợp các bản vá cục bộ (union of local patches), mỗi bản vá giải mã thành các điểm 3D Gaussians.",
+    "type": "fact",
+    "source_document": "Paper_124_Atlas Gaussians Diffusion for 3D Generation.pdf"
+  },
+  {
+    "question": "Atlas Gaussians có sử dụng VAE để trực tiếp xuất ra 3D Gaussians như các phương pháp L3DG hay DiffGS không?",
+    "ground_truth": "Không. Nó tham số hóa bản vá dưới dạng chuỗi các vector đặc trưng và dùng hàm học được để giải mã, tránh việc tối ưu hóa từng hình dạng (per-shape optimization) trước khi huấn luyện VAE.",
+    "type": "negative",
+    "source_document": "Paper_124_Atlas Gaussians Diffusion for 3D Generation.pdf"
+  },
+  {
+    "question": "Diffusion² (Paper 125) kết hợp điểm số (score composition) từ hai loại mô hình khuếch tán nào để tạo nội dung 3D động?",
+    "ground_truth": "Video diffusion models (cung cấp ưu tiên động lực học) và Multi-view diffusion models (cung cấp ưu tiên hình học).",
+    "type": "fact",
+    "source_document": "Paper_125_Diffusion$^2$_ Dynamic 3D Content Generation via Score Composition....pdf"
+  },
+  {
+    "question": "Theo bảng kết quả trong Paper 125, phiên bản đầy đủ của Diffusion² đạt chỉ số CLIP-Score trung bình là bao nhiêu?",
+    "ground_truth": "12.35",
+    "type": "table_extraction",
+    "source_document": "Paper_125_Diffusion$^2$_ Dynamic 3D Content Generation via Score Composition....pdf"
+  },
+  {
+    "question": "DSPart (Paper 126) sử dụng kỹ thuật gì để giải quyết vấn đề thiếu chi tiết và sai lệch tư thế trong dữ liệu tổng hợp từ 3D?",
+    "ground_truth": "Part-aware Refiner (PRF) dựa trên ControlNet.",
+    "type": "fact",
+    "source_document": "Paper_126_DSPart_ A Large-scale Diffusion-generated Synthetic Dataset with....pdf"
+  },
+  {
+    "question": "Dựa trên Table 11 trong Paper 126, việc kết hợp dữ liệu DSPart-Animal giúp tăng độ chính xác phân đoạn (Segmentation Accuracy) trên tập PartImageNet lên mức nào?",
+    "ground_truth": "75.52 ± 0.40",
+    "type": "table_extraction",
+    "source_document": "Paper_126_DSPart_ A Large-scale Diffusion-generated Synthetic Dataset with....pdf"
+  },
+  {
+    "question": "Ouroboros3D (Paper 127) sử dụng cơ chế nào để khắc phục 'multi-view bias' (sai lệch đa góc nhìn) thường thấy ở các mô hình khuếch tán đa view?",
+    "ground_truth": "3D-aware Recursive Diffusion (Khuếch tán đệ quy nhận thức 3D), cho phép phản hồi thông tin hình học 3D ngược lại quá trình sinh ảnh.",
+    "type": "reasoning",
+    "source_document": "Paper_127_Ouroboros3D_ Image-to-3D Generation via 3D-aware Recursive Diffusion.pdf"
+  },
+  {
+    "question": "Phương pháp DM-Calib (Paper 128) ước lượng thông số nội tại camera (camera intrinsics) từ một ảnh đơn bằng cách nào?",
+    "ground_truth": "Sử dụng 'Camera Image' - một biểu diễn dựa trên hình ảnh mã hóa các thông số nội tại số học, và dùng mô hình khuếch tán để sinh ra nó.",
+    "type": "fact",
+    "source_document": "Paper_128_Boost 3D Reconstruction using Diffusion-based Intrinsic Estimation.pdf"
+  },
+  {
+    "question": "Theo Table 12 trong Paper 128, việc sử dụng 'camera image' giúp cải thiện độ chính xác ước lượng độ sâu (metric depth) trên tập ibims từ 82.6 lên bao nhiêu?",
+    "ground_truth": "88.7",
+    "type": "table_extraction",
+    "source_document": "Paper_128_Boost 3D Reconstruction using Diffusion-based Intrinsic Estimation.pdf"
+  },
+  {
+    "question": "3DTopia-XL (Paper 129) sử dụng biểu diễn 3D nào để làm trung gian cho quá trình khuếch tán?",
+    "ground_truth": "Primitive (Nguyên thủy/Cơ bản), cụ thể là PrimX.",
+    "type": "fact",
+    "source_document": "Paper_129_3DTopia-XL_ Scaling High-quality 3D Asset Generation via Primitive....pdf"
+  },
+  {
+    "question": "Chiến lược khởi tạo 'Uniform + Farthest' trong 3DTopia-XL đạt chỉ số PSNR-SDF là bao nhiêu theo Table 6?",
+    "ground_truth": "72.12",
+    "type": "table_extraction",
+    "source_document": "Paper_129_3DTopia-XL_ Scaling High-quality 3D Asset Generation via Primitive....pdf"
+  },
+  {
+    "question": "Paper 130 (3D-free meets 3D priors) đề xuất sử dụng hướng dẫn từ mô hình nào để thực hiện tổng hợp góc nhìn mới (Novel View Synthesis)?",
+    "ground_truth": "Pretrained Video Diffusion Models (Mô hình khuếch tán video đã huấn luyện trước).",
+    "type": "fact",
+    "source_document": "Paper_130_3D-free meets 3D priors_ Novel View Synthesis from a Single Image....pdf"
+  },
+  {
+    "question": "So với phương pháp HawkI, phương pháp của Paper 130 có lợi thế gì về thời gian thực thi (Table 4)?",
+    "ground_truth": "Nhanh hơn một chút (398 giây so với 401 giây của HawkI) nhưng quan trọng hơn là không cần quy trình tối ưu hóa phức tạp như HawkI.",
+    "type": "table_extraction",
+    "source_document": "Paper_130_3D-free meets 3D priors_ Novel View Synthesis from a Single Image....pdf"
+  },
+  {
+    "question": "Mô hình MVLight có khả năng ước lượng các bản đồ vật liệu PBR (Physically Based Rendering) như độ nhám (roughness) và kim loại (metallic) không?",
+    "ground_truth": "Có. Hình 8 trong bài báo hiển thị kết quả định tính về ước lượng vật liệu PBR.",
+    "type": "fact",
+    "source_document": "Paper_122_MVLight_ Relightable Text-to-3D Generation via Light-conditioned....pdf"
+  }
+,
+  {
+    "question": "Mô hình Geometry Image Diffusion (GIMDiffusion) sử dụng biểu diễn nào để thay thế các kiến trúc 3D phức tạp như NeRF hay Point Cloud?",
+    "ground_truth": "Geometry Images (Hình ảnh hình học), giúp biểu diễn hình dạng 3D hiệu quả dưới dạng hình ảnh 2D.",
+    "type": "fact",
+    "source_document": "Paper_131_Geometry Image Diffusion_ Fast and Data-Efficient Text-to-3D with....pdf"
+  },
+  {
+    "question": "GIMDiffusion có yêu cầu lưới (meshes) đầu vào phải là đa tạp (manifold) trong quá trình huấn luyện không?",
+    "ground_truth": "Không. Mô hình không bị giới hạn bởi yêu cầu manifold meshes trong cả quá trình huấn luyện và suy luận.",
+    "type": "negative",
+    "source_document": "Paper_131_Geometry Image Diffusion_ Fast and Data-Efficient Text-to-3D with....pdf"
+  },
+  {
+    "question": "GravMAD giải quyết khó khăn khi robot thực hiện các tác vụ mới (unseen tasks) bằng cách chia nhỏ tác vụ như thế nào?",
+    "ground_truth": "Chia tác vụ thành các mục tiêu phụ (sub-goals) dựa trên chỉ dẫn ngôn ngữ và sử dụng bản đồ giá trị không gian (Spatial Value Maps) để hướng dẫn hành động.",
+    "type": "reasoning",
+    "source_document": "Paper_132_GravMAD_ Grounded Spatial Value Maps Guided Action Diffusion for....pdf"
+  },
+  {
+    "question": "Trong Paper 132 (GravMAD), các sub-goal được biểu diễn dưới dạng cấu trúc dữ liệu nào?",
+    "ground_truth": "Point cloud structures (Cấu trúc đám mây điểm).",
+    "type": "fact",
+    "source_document": "Paper_132_GravMAD_ Grounded Spatial Value Maps Guided Action Diffusion for....pdf"
+  },
+  {
+    "question": "VFDiff (Paper 133) khác biệt thế nào so với các mô hình tạo sinh phân tử khác về cơ chế hướng dẫn?",
+    "ground_truth": "VFDiff tích hợp hướng dẫn dựa trên năng lượng liên kết protein-ligand (energy-based guidance) vào cả quá trình khuếch tán thuận và nghịch.",
+    "type": "reasoning",
+    "source_document": "Paper_133_VFDiff_ SE(3)-Equivariant Vector Field Guided Diffusion Model for....pdf"
+  },
+  {
+    "question": "VFDiff sử dụng cơ chế nào để điều chỉnh quỹ đạo khuếch tán dựa trên gradient năng lượng?",
+    "ground_truth": "Energy-planning (Lập kế hoạch năng lượng).",
+    "type": "fact",
+    "source_document": "Paper_133_VFDiff_ SE(3)-Equivariant Vector Field Guided Diffusion Model for....pdf"
+  },
+  {
+    "question": "Kiến trúc autoencoder của LaGeM (Paper 134) được thiết kế để xử lý loại dữ liệu đầu vào đặc thù nào?",
+    "ground_truth": "Unordered sets of vectors (Tập hợp vector không có thứ tự).",
+    "type": "fact",
+    "source_document": "Paper_134_LaGeM_ A Large Geometry Model for 3D Representation Learning and....pdf"
+  },
+  {
+    "question": "Theo Table 6 trong Paper 134, chỉ số surface-FPD cho danh mục 'chair' của mô hình LaGeM (Ours) là bao nhiêu?",
+    "ground_truth": "0.64",
+    "type": "table_extraction",
+    "source_document": "Paper_134_LaGeM_ A Large Geometry Model for 3D Representation Learning and....pdf"
+  },
+  {
+    "question": "X-Diffusion (Paper 135) có thể tái tạo thể tích MRI 3D từ đầu vào tối thiểu là gì?",
+    "ground_truth": "Một lát cắt MRI 2D đơn lẻ (a single 2D MRI slice).",
+    "type": "fact",
+    "source_document": "Paper_135_X-Diffusion_ Generating Detailed 3D MRI Volumes From a Single Image....pdf"
+  },
+  {
+    "question": "Dựa trên Table XV trong Paper 135, thời gian suy luận (Runtime) của X-Diffusion khi không dùng tối ưu hóa (TTO) là bao nhiêu giây?",
+    "ground_truth": "141.461 giây.",
+    "type": "table_extraction",
+    "source_document": "Paper_135_X-Diffusion_ Generating Detailed 3D MRI Volumes From a Single Image....pdf"
+  },
+  {
+    "question": "Build-A-Scene (Paper 137) cho phép người dùng kiểm soát những thuộc tính nào của vật thể trong không gian 3D?",
+    "ground_truth": "Loại đối tượng (object type), vị trí (location), và hướng xoay trong mặt phẳng (in-plane rotation).",
+    "type": "fact",
+    "source_document": "Paper_137_Build-A-Scene_ Interactive 3D Layout Control for Diffusion-Based....pdf"
+  },
+  {
+    "question": "Hệ thống EditRoom (Paper 139) chuyển đổi lệnh ngôn ngữ tự nhiên thành thao tác chỉnh sửa bố cục thông qua module nào?",
+    "ground_truth": "Command Parameterizer (Bộ tham số hóa lệnh).",
+    "type": "fact",
+    "source_document": "Paper_139_EditRoom_ LLM-parameterized Graph Diffusion for Composable 3D Room....pdf"
+  },
+  {
+    "question": "EditRoom sử dụng loại mô hình khuếch tán nào để chỉnh sửa đồ thị cảnh?",
+    "ground_truth": "LLM-parameterized Graph Diffusion.",
+    "type": "fact",
+    "source_document": "Paper_139_EditRoom_ LLM-parameterized Graph Diffusion for Composable 3D Room....pdf"
+  },
+  {
+    "question": "Trong khuôn khổ Bayesian của Paper 140, mô hình khuếch tán đóng vai trò gì?",
+    "ground_truth": "Làm phân phối tiên nghiệm (prior distributions) để bù đắp cho các phép đo không đầy đủ.",
+    "type": "reasoning",
+    "source_document": "Paper_140_Diffusion priors for Bayesian 3D reconstruction from incomplete....pdf"
+  },
+  {
+    "question": "Phương pháp trong Paper 140 có yêu cầu dữ liệu đo đạc (measurements) phải đầy đủ để tái tạo 3D không?",
+    "ground_truth": "Không. Nó được thiết kế đặc biệt cho 'incomplete measurements' (phép đo không đầy đủ).",
+    "type": "negative",
+    "source_document": "Paper_140_Diffusion priors for Bayesian 3D reconstruction from incomplete....pdf"
+  },
+  {
+    "question": "Phương pháp DC3DO (Paper 141) sử dụng mô hình khuếch tán (diffusion models) để thực hiện tác vụ gì thay vì tạo sinh?",
+    "ground_truth": "Phân loại đối tượng 3D (3D object classification), tập trung vào các danh mục như ghế và xe hơi từ dataset ShapeNet.",
+    "type": "fact",
+    "source_document": "Paper_141_DC3DO_ Diffusion Classifier for 3D Objects.pdf"
+  },
+  {
+    "question": "Mô hình GaussianAnything (Paper 142) sử dụng kiến trúc gì để cải thiện khả năng tách biệt giữa hình dạng và kết cấu (shape-texture disentanglement)?",
+    "ground_truth": "Sử dụng Cascaded Latent Flow-based Model kết hợp với không gian tiềm ẩn cấu trúc đám mây điểm (Point Cloud-structured Latent space).",
+    "type": "reasoning",
+    "source_document": "Paper_142_GaussianAnything_ Interactive Point Cloud Flow Matching for 3D....pdf"
+  },
+  {
+    "question": "Co3Gesture (Paper 143) được thiết kế để giải quyết vấn đề gì mà các phương pháp tạo cử chỉ co-speech hiện tại bỏ qua?",
+    "ground_truth": "Vấn đề mô hình hóa cử chỉ đồng thời (concurrent gesture modeling) trong các cuộc hội thoại tương tác hai người (two-person interactive conversations).",
+    "type": "fact",
+    "source_document": "Paper_143_Co$^{_mathbf{3}}$Gesture_ Towards Coherent Concurrent Co-speech 3D....pdf"
+  },
+  {
+    "question": "LISA (Paper 144) tích hợp module nào vào mô hình khuếch tán 2D để cho phép tạo sinh 3D trực tiếp?",
+    "ground_truth": "Lightweight Image Splats Adaptation (LISA) adapter tích hợp vào decoder của mô hình khuếch tán 2D bị đóng băng.",
+    "type": "fact",
+    "source_document": "Paper_144_LISA_ UNLEASHING 2D DIFFUSION FOR 3D GENERATION VIA LIGHTWEIGHT....pdf"
+  },
+  {
+    "question": "Theo nghiên cứu 'Too Good to be Bad' (Paper 145), các LLM hiện đại thường thất bại trong việc nhập vai (role-play) nhân vật nào?",
+    "ground_truth": "Nhân vật phản diện (Villains), do các biện pháp căn chỉnh an toàn (safety alignment) quá mức.",
+    "type": "fact",
+    "source_document": "Paper_145_Too Good to be Bad_ On the Failure of LLMs to Role-Play Villains.pdf"
+  },
+  {
+    "question": "Dựa trên Table 11 trong Paper 145, việc bật chức năng suy luận (Reasoning) có giúp cải thiện đáng kể khả năng nhập vai phản diện của model Qwen3-max không?",
+    "ground_truth": "Không. Điểm số thậm chí giảm ở một số mức độ (Level 3 từ 2.53 xuống 2.18).",
+    "type": "table_extraction",
+    "source_document": "Paper_145_Too Good to be Bad_ On the Failure of LLMs to Role-Play Villains.pdf"
+  },
+  {
+    "question": "Visual Spatial Tuning (VST) trong Paper 146 sử dụng quy trình huấn luyện hai giai đoạn nào?",
+    "ground_truth": "Supervised Fine-Tuning (SFT) để xây dựng kiến thức không gian nền tảng, theo sau là Reinforcement Learning (RL) để cải thiện khả năng suy luận không gian.",
+    "type": "fact",
+    "source_document": "Paper_146_Visual Spatial Tuning.pdf"
+  },
+  {
+    "question": "DeepEyesV2 (Paper 147) quan sát thấy vấn đề gì khi chỉ sử dụng Direct Reinforcement Learning cho việc sử dụng công cụ (tool-use)?",
+    "ground_truth": "Thất bại trong việc tạo ra hành vi sử dụng công cụ mạnh mẽ (fails to induce robust tool-use behavior), dẫn đến việc phải dùng quy trình huấn luyện hai giai đoạn (cold-start + RL).",
+    "type": "reasoning",
+    "source_document": "Paper_147_DeepEyesV2_ Toward Agentic Multimodal Model.pdf"
+  },
+  {
+    "question": "VeriCoT (Paper 148) sử dụng phương pháp nào để xác minh tính đúng đắn của các bước suy luận Chain-of-Thought?",
+    "ground_truth": "Neuro-symbolic method (Phương pháp thần kinh-ký hiệu), chuyển đổi các bước CoT thành logic bậc nhất (first-order logic) và sử dụng bộ giải tự động (automated solvers) để kiểm tra tính hợp lệ.",
+    "type": "fact",
+    "source_document": "Paper_148_VeriCoT_ Neuro-symbolic Chain-of-Thought Validation via Logical Consistency Checks.pdf"
+  },
+  {
+    "question": "Trong Paper 149 (Real-Time Reasoning Agents), kiến trúc 'Agile Thinker' kết hợp hai mô hình tư duy nào?",
+    "ground_truth": "Reactive agents (Phản ứng nhanh, tính toán giới hạn) và Planning agents (Lập kế hoạch, tính toán mở rộng).",
+    "type": "fact",
+    "source_document": "Paper_149_Real-Time Reasoning Agents in Evolving Environments.pdf"
+  },
+  {
+    "question": "Agile Thinker trong Paper 149 có thực hiện suy luận của hai luồng (reactive và planning) một cách tuần tự không?",
+    "ground_truth": "Không. Nó thực hiện đồng thời (simultaneously engages both reasoning paradigms).",
+    "type": "negative",
+    "source_document": "Paper_149_Real-Time Reasoning Agents in Evolving Environments.pdf"
+  },
+  {
+    "question": "Tác vụ Dense Motion Captioning (DMC) được giới thiệu trong Paper 150 khác với captioning truyền thống ở điểm nào?",
+    "ground_truth": "Nó yêu cầu định vị thời gian (temporally localize) và tạo chú thích chi tiết cho từng phân đoạn hành động trong chuỗi chuyển động 3D, thay vì chỉ mô tả toàn bộ chuỗi.",
+    "type": "reasoning",
+    "source_document": "Paper_150_Dense Motion Captioning.pdf"
+  },
+  {
+    "question": "Bộ dữ liệu CompMo trong Paper 150 chứa bao nhiêu khung hình chuyển động?",
+    "ground_truth": "Hơn 7 triệu khung hình (more than 7M frames).",
+    "type": "fact",
+    "source_document": "Paper_150_Dense Motion Captioning.pdf"
+  },
+  {
+    "question": "Theo Case Study 1 trong Paper 147 (DeepEyesV2), mô hình đã sử dụng công cụ gì để trả lời câu hỏi về số lượng dược liệu trong bài hát?",
+    "ground_truth": "Search (Tìm kiếm Web), cụ thể là tìm lời bài hát và phân tích.",
+    "type": "reasoning",
+    "source_document": "Paper_147_DeepEyesV2_ Toward Agentic Multimodal Model.pdf"
+  },
+  {
+    "question": "Mô hình LISA (Paper 144) có thể tạo ra các bản đồ vật liệu PBR (Normal, Albedo, Metallic, Roughness) đồng thời với Gaussian Splats không?",
+    "ground_truth": "Có.",
+    "type": "fact",
+    "source_document": "Paper_144_LISA_ UNLEASHING 2D DIFFUSION FOR 3D GENERATION VIA LIGHTWEIGHT....pdf"
+  }
+]
